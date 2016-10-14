@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+	<head>
+		<meta charset="utf-8">
+		<title>Homework - Login</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+		<!-- Le styles -->
+		<link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="css/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="css/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="css/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="css/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
+		<link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+		<!-- Scripts -->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
+		<![endif]-->
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="/js/others/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="js/others/jquery.js"></script>
+		<script type="text/javascript" src="js/others/bootstrap.js"></script>
+		<script type="text/javascript" src="js/others/bootstrap-validator.js"></script>
+		<script type="text/javascript" src="js/others/jquery.form.min.js"></script>
+		<script type="text/javascript" src="js/others/jquery.masked-input.js"></script>
+		<script type="text/javascript" src="js/others/moment-with-locales.js"></script>
+		<script type="text/javascript" src="js/others/bootstrap-date-time-picker.js"></script>
+		<script type="text/javascript" src="js/others/file-input.min.js"></script>
+		<script type="text/javascript" src="js/others/bootstrap-toggle.min.js"></script>
+		<script type="text/javascript" src="js/others/bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="js/others/boot-box.min.js"></script>
+		<script type="text/javascript" src="js/others/bootstrap-waiting-for.js"></script>
+		<script type="text/javascript" src="js/others/high-charts.js"></script>
+		<script type="text/javascript" src="js/others/exporting.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/functions.global.js"></script>
+		<script type="text/javascript" src="js/functions.teachers.js"></script>
+		<script type="text/javascript" src="js/functions.students.js"></script>
+	</head>
+	<body>
+        <div id="main-container" class="container"><!-- .container -->
+			<div class="row"> <!-- .row 1 -->
+				<div class="col-sm-3"></div>
+				<div class="col-sm-6">
+					<div class="panel-forms page panel-success">
+						<div id="panel-heading" class="panel-heading">
+							<img id="icon-page-login" class="listar" src="img/icon.png">
+							<h1 id="title-in-login" class="listar">Homework</h1>
+						</div>
+						<div class="panel-body">
+
+
+							<form id="form-login" class="form-horizontal" method="post" data-toggle="validator" role="form">
+								<div id="div-form-login-info-email" class="form-group">
+									<label for="login-email" class="control-label col-sm-3">E-mail</label>
+									<div class="col-sm-7">
+										<input id="login-email" class="form-control" name="email" type="email" maxlength="50" data-error="Entre com um endereço de email válido." required />
+										<div id="div-login-info-email" class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="control-label col-sm-3">Senha</label>
+									<div class="col-sm-7">
+										<input id="password" class="form-control" name="password" type="password" maxlength="20" pattern=".{8,}" data-error="Mínimo 8 caracteres." required />
+										<div class="help-block with-errors"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-3"></div>
+									<div class="col-sm-7">
+										<input id="input-login" type="submit" class="form-control btn btn-forms-lc" value="Login"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-3"></div>
+									<div class="col-sm-4">
+										<a href="register.html">Realizar cadastro.</a>
+									</div>
+									<div class="col-sm-4">
+										<a href="password.html">Esqueceu sua senha?</a>
+									</div>
+								</div>
+							</form>
+
+
+
+							<br/>
+							<br/>
+							<div>
+								<em>Albert Einstein</em>
+								<blockquote>
+									<small id="phase">A mente que se abre a uma nova ideia jamais voltará ao seu tamanho original.</small>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3"></div>        
+			</div> <!-- fim .row 1 -->
+		</div> <!-- fim div .container -->
+	</body>
+</html>

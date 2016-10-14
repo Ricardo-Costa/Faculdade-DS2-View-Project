@@ -1,0 +1,395 @@
+/* fonte principal do h1 */
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@font-face{
+    font-family: 'GoodDog';
+    src: url('../fonts/GoodDog.otf');
+}
+@font-face{
+    font-family: 'Tangerine';
+    src: url('../fonts/Tangerine_Bold.ttf');
+}
+/* alinhar componentes */
+.listar{
+    display: inline-block;
+}
+/* icone principal da pagina de login */
+#icon-page-login {
+    /* -ms-transform: rotate(-15deg);
+    -webkit-transform: rotate(-15deg);
+    transform: rotate(-15deg); */
+    margin-left: -30px;
+    margin-top: -30px;
+    width: 200px;
+    height: 200px;
+}
+/* titulo principal da pagina de login */
+#title-in-login {
+    font-weight: bold;
+    margin-left: 15px;
+    font-size: 30px;
+}
+
+@media screen and (min-width: 768px) {
+    #icon-page-login {
+        width: 70px;
+        height: 70px;
+    }
+}
+@media screen and (max-width: 360px) {
+    #icon-page-login {
+        margin-left: 0;
+        margin-top: 0;
+        width: 50px;
+        height: 50px;
+    }
+    #title-in-login {
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+
+/* max-width  */
+.text_footer {
+    display: none
+}
+@media screen and (min-width: 768px) {
+    .text_footer {display: block }
+}
+body {
+    /*background: url('../img/background.jpg') center #ffffff no-repeat;
+    background-size: 826px 633px;
+    background-size: 100% 100%;*/
+    color: rgba(0, 0, 0, 0.71);
+}
+/* container principal */
+div#main-container {
+    background: url('../img/background.jpg') center #ffffff no-repeat;
+    background-size: 100% 100%;
+    min-height: 720px;
+}
+div.panel-forms {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    margin-top: 16%;
+}
+div#panel-heading {
+    background-color: #7146a6;
+}
+.panel-forms h1 {
+    /* font-family: 'Indie Flower', Arial, serif; font-weight: 400; */
+    color: #e3e3e3;
+
+    font-family: 'GoodDog', serif;
+}
+.panel-forms h1 small {
+    color: #ffffff;
+}
+small#phase {
+    font-family: 'Tangerine', serif;
+    font-size: 22px;
+}
+.panel-forms input.btn-forms-lc {
+    background-color: #7146a6;
+    border: none;
+    color: #fafafa;
+}
+.panel-forms input.btn-forms-lc:hover,
+.panel-forms input.btn-forms-lc:active,
+.panel-forms input.btn-forms-lc:focus,
+{
+    background-color: #4c2f6f;
+    color: #e3e3e3;
+}
+/* p - alert */
+p.msg_alert{
+    text-align: center;
+}
+/* img - captcha */
+img#img_captcha{
+    width: 170px; height: 30px
+}
+img#img_refresh{
+    float: right;
+    margin-right: 12%;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    opacity: 0.6
+}
+img#img_refresh:hover{
+    opacity: 1
+}
+/* customizando class well */
+.well {
+    box-shadow: none;
+    background-color: #FFFFFF;
+}
+/* footer */
+footer {
+    background-color: #7146a6;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-color: #080808;
+    font-family: "Open Sans","sans-serif";
+    font-size: 14px;
+    color: #ffffff;
+    height: 100%;
+    padding-top: 20px;
+    padding-bottom: 200px;
+}
+footer a {
+    color: #ffd07d;
+}
+footer a:hover{
+    color: #ffa71e;
+    text-decoration: none;
+}
+footer hr {
+    border: none;
+    border-top: 1px dashed #e3e3e3;
+}
+p#company {
+    text-align: center;
+    opacity: 0.6;
+}
+
+.text_footer h4 {
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+/* Customize MENU TOP */
+#custom-bootstrap-menu {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+    border: none;
+}
+#custom-bootstrap-menu.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+#custom-bootstrap-menu.navbar-default {
+    font-size: 14px;
+    background-color: #7146a6;
+    border-width: 1px;
+    border-radius: 0;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color: #7146a6;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: #472c68;
+}
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: #4a2e6c;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle {
+    border-color: #4a2e6c;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+    background-color: #4a2e6c;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #4a2e6c;
+}
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #4a2e6c;
+}
+/* adaptar cor do Dropdown */
+@media screen and (max-width: 768px) {
+    #custom-bootstrap-menu a{
+        color: #ffffff
+    }
+    #custom-bootstrap-menu a:hover{
+        color: #e8e8e8;
+    }
+}
+/* Tab panel */
+.panel-div-tab {
+    padding-top: 20px;
+}
+/* Perfil do usuário */
+#user-profile {
+    text-align: center;
+}
+.user-image img {
+    background-color: #cecece;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.user-info {
+    width: 100%;
+}
+#tb-profile {
+    text-align: left;
+}
+/* ocultar campos */
+.field-teacher-register, .div-lecionar-nova {
+    display: none;
+}
+span.obs{
+    color: darkred;
+    font-weight: bold;
+}
+/* bloquei de exibição */
+.ocultar {
+    display: none;
+}
+/* Página de notificações */
+ul#notification {
+    list-style: none;
+    text-decoration: none;
+}
+ul#notification li{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #d6caca;
+    opacity: 0.3;
+    transition: 0.4s;
+}
+ul#notification li:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+ul#notification li.left .chat-body{
+    margin-left: 60px;
+}
+#notification li.right .chat-body{
+    margin-right: 60px;
+}
+ul#notification li .chat-body p{
+    margin: 0;
+    color: #777777;
+}
+div#result-filter-id{
+    background-color: #7146a6;
+    padding: 10px;
+}
+
+/* Professores - Painel de criação de tarefas  */
+div#criar-tarefa-ferramentas {
+    color: #333;
+    border-top: 1px solid #DDD;
+    border-bottom: 1px solid #DDD;
+    padding: 10px 15px;
+    background-color: #F5F5F5;
+}
+/* painl professor, tarefas definidas */
+div.tasks-def {
+    display: block;
+}
+div.tasks-bnts, div.tasks-summary {
+    display: inline-block;
+    padding-right: 10px;
+}
+div.create-task {
+    margin-bottom: 10px;
+}
+div.quest-group {
+    border-bottom: 1px dashed #dfdfdf;
+    padding-bottom: 15px;
+}
+div.item-quest {
+    margin-top: 10px;
+}
+/* Professores: Painel listar tarefas atuais */
+ul.panel-display-ul-li {
+    text-decoration: none;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+    background-color: #fcfcfc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #DDDDDD;
+    border-left: #efacbf 2px solid;
+    border-radius: 4px;
+}
+ul.panel-display-ul-li li{
+    font-size: 13px;
+    font-style: italic;
+    margin-left: 0;
+    padding: 6px;
+    text-decoration: none;
+    border-top: 1px solid #cbeff4;
+}
+ul.panel-display-ul-li li.title-li-tasks {
+    border-top:2px solid #cbeff4;
+    display: block;
+}
+ul.panel-display-ul-li li:hover {
+    cursor: context-menu;
+}
+div.container-data-task {
+    display: none;
+}
+/* Aluno: Painel responder tarefas atuais */
+div.div-question {
+    padding: 20px 10px 30px 30px;
+    background-color: #fcfcfc;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #DDDDDD;
+    border-left: #efacbf 2px solid;
+    border-radius: 4px;
+}
+div.div-question p {
+    padding-top: 10px;
+    border-top:2px solid #cbeff4;
+}
+/* Personalizar Options de Select's */
+select.form-control option {
+    padding: 6px 12px;
+    cursor: pointer;
+}
+select.form-control option:hover {
+    background-color: #cecece;
+}
+div.my-blockquote {
+    padding: 10px 20px;
+    margin: 10px 0 0 0 ;
+    border-left: 5px solid #EEE;
+    font-style: italic;
+}
+div.my-blockquote small::before {
+    content: "— ";
+    font-size: 11px;
+    font-weight: bolder;
+    color: #696969;
+}
+div.my-blockquote small {
+    font-size: 11px;
+    font-weight: bolder;
+    color: #696969;
+}
+/* definir nota */
+.btn-define-point {
+    color: #989898;
+    font-style: normal;
+    font-weight: bolder;
+    margin-left: 15px;
+}
+/* identificador de unidade de questao (Resposta do Alumo) */
+.the-question {
+    /* border-bottom: 2px dashed #cbeff4; */
+}
+.define-point {
+    background-color: #EEE;
+    padding: 5px;
+    margin: -19px 0 0 0 ;
+}
+/* formulário para envio de imagem do perfil */
+form#user-img-upload {
+    display: none;
+    padding: 15px;
+    background-color: #EEE;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+input#image-file {
+    padding: 5px;
+}
