@@ -120,3 +120,28 @@ function checkEmail(_email, handleData) {
         }
     });
 }
+
+/**
+ * Formar Ul & Li em div de paginação de tabelas
+ *
+ * @param divPgHtmlId
+ * @param qtd
+ * @param pgCurrent
+ * @param titleFunction
+ */
+function formatPaginationPanel(divPgHtmlId, qtd, pgCurrent, titleFunction) {
+    // Define quantidades de links que devem ser exibidos na paginação
+    var count = parseInt(mainArray.length / qtd) ;
+    var divPg = '<ul class="pagination">';
+    for (var i = 1; i <= count; i++) {
+        if (i == pgCurrent) {
+            divPg += '<li class="active"><a href="#" onclick="'+ titleFunction
+                +'('+ i +', '+ qtd +'); return false;">'+ i +'</a></li>';
+        } else {
+            divPg += '<li><a href="#" onclick="'+ titleFunction+'('+ i +', '+ qtd
+                +'); return false;">'+ i +'</a></li>';
+        }
+    }
+    divPg += '</ul>';
+    $(divPgHtmlId).html(divPg);
+}

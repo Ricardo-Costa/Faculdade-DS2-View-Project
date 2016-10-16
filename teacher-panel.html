@@ -1,10 +1,382 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<html lang="pt-Br">
+    <head>
+        <meta charset="utf-8">
+        <title>Homework - Panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+        <!-- Le styles -->
+        <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+        <!-- Scripts -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
+        <![endif]-->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/others/respond.min.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="js/others/jquery.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-validator.js"></script>
+        <script type="text/javascript" src="js/others/jquery.form.min.js"></script>
+        <script type="text/javascript" src="js/others/jquery.masked-input.js"></script>
+        <script type="text/javascript" src="js/others/moment-with-locales.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-date-time-picker.js"></script>
+        <script type="text/javascript" src="js/others/file-input.min.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-toggle.min.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="js/others/boot-box.min.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-waiting-for.js"></script>
+        <script type="text/javascript" src="js/others/high-charts.js"></script>
+        <script type="text/javascript" src="js/others/exporting.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript" src="js/functions.global.js"></script>
+        <script type="text/javascript" src="js/functions.teachers.js"></script>
+        <script type="text/javascript" src="js/functions.students.js"></script>
+    </head>
+    <body>
 
-</body>
+
+        <nav id="custom-bootstrap-menu" class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand font-system-name">Homework</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="http://localhost/teacher/panel">Painel</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span> João Professor <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="http://localhost/user/profile">Perfil</a></li>
+                                <li><a href="http://localhost/user/notification">Notificações <span id="num-notification" class="badge"></span></a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="http://localhost/user/logout">Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+        <script type="text/javascript">
+            // Carregar tarefas atuais
+            listTasks();
+        </script>
+        <div class="container"><!-- .container -->
+            <div class="row"> <!-- .row 1 -->
+                <div class="well">
+                    <ul id="teacher-panel-tab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="dropdown active">
+                            <a aria-expanded="false" href="#" id="myTabDrop2" class="dropdown-toggle" data-toggle="dropdown"
+                               aria-controls="myTabDrop2-contents">Tarefas <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDrop2" id="myTabDrop2-contents">
+                                <li class="active">
+                                    <a id="teacher-panel-current-tasks-tab" onclick="listTasks()" href="#teacher-panel-current-tasks" role="tab"
+                                       data-toggle="tab" aria-controls="teacher-panel-current-tasks" aria-expanded="true">Tarefas atuais</a>
+                                </li>
+                                <li>
+                                    <a id="teacher-panel-task-create-new-tab" onclick="validationCreateTask()" href="#teacher-panel-task-create-new" role="tab"
+                                       data-toggle="tab" aria-controls="teacher-panel-task-create-new" aria-expanded="true">Criar nova</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="">
+                            <a id="teacher-panel-students-tab" onclick="getStudents()" href="#teacher-panel-students" role="tab"
+                               data-toggle="tab" aria-controls="teacher-panel-students" aria-expanded="true">Alunos</a>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a aria-expanded="false" href="#" id="myTabDrop3" class="dropdown-toggle" data-toggle="dropdown"
+                               aria-controls="myTabDrop3-contents">Turmas<span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDrop3" id="myTabDrop3-contents">
+                                <li>
+                                    <a id="teacher-panel-teach-currents-tab" onclick="getAllTeaches();" href="#teacher-panel-teach-currents" role="tab"
+                                       data-toggle="tab" aria-controls="teacher-panel-teach-currents" aria-expanded="true">Turmas atuais</a>
+                                </li>
+                                <li>
+                                    <a id="teacher-panel-teach-new-tab" onclick="//setSelectOptionsLecionar()" href="#teacher-panel-teach-new" role="tab"
+                                       data-toggle="tab" aria-controls="teacher-panel-teach-new" aria-expanded="true">Definir nova</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div id="teacher-panel-tab-div" class="tab-content">
+                        <div id="teacher-panel-current-tasks" role="tabpanel" class="tab-pane fade active in panel-div-tab"
+                             aria-labelledby="teacher-panel-current-tasks-tab">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4>Tarefas</h4>
+                                    <p>
+                                        Estas são todas as tarefas relacionadas as suas turmas atualmente.<br/>
+                                        Tarefas podem ser visualizadas, editadas e avaliadas junto as respostas dos ALunos.
+                                    </p>
+                                </div>
+                                <div class="panel-body">
+                                    <!-- Recebe listagem de tarefas atuais do professor  -->
+                                    <ul id="teacher-panel-currents-tasks" class="panel-display-ul-li"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="teacher-panel-task-create-new" role="tabpanel" class="tab-pane fade in panel-div-tab "
+                             aria-labelledby="teacher-panel-task-create-new-tab">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4>Criar Nova Tarefa</h4>
+                                    <p>
+                                        Este é o painel principal para criação de novas tarefas.
+                                    </p>
+                                    <b>Atenção:</b>
+                                    <ul>
+                                        <li>
+                                            <small>Tarefas só poderão ser editadas se a "situação" da mesma encontra-se no
+                                                estado <b>" OFF (Indisponível) "</b> para alunos.</small>
+                                        </li>
+                                        <li>
+                                            <small>Uma vez <b>disponibilizada</b>, esta tarefa não poderá ser "editada" novamente.</small>
+                                        </li>
+                                        <li>
+                                            <small>Existe um limite máximo de <b>15</b> questões para cada tarefa.</small>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="div-create-tasks-now" class="panel-body hide">
+                                    <form id="form_createTask" class="form-horizontal" action="" method="post">
+                                        <div class="form-group">
+                                            <label for="date-ending" class="control-label col-sm-3">Date de Enc.</label>
+                                            <div class="col-sm-4">
+                                                <input id="date-ending" name="date_ending" type='text' class="form-control"
+                                                       required placeholder="Data de encerramento"/>
+                                                <script type="text/javascript">
+                                                    $(function () {
+                                                        $('#date-ending').datetimepicker({
+                                                            format: 'DD-MM-YYYY HH:mm'
+                                                        });
+                                                    });
+                                                </script>
+                                                <small>
+                                                    <b>Período</b>: Você precisa definir o prazo limite para a entrega das
+                                                    resoluções deste questionário.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="team" class="control-label col-sm-3">Turma</label>
+                                            <div class="col-sm-4">
+                                                <select id="team" name="team" required class="form-control">
+                                                    <option value="0">Selecione a Turma...</option>
+                                                </select>
+                                                <small>
+                                                    <b>Turma</b>: Especifique para qual turma este questionário deve ser aplicado.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <hr/>
+                                        <div id="question_1" class=""></div>
+                                        <div id="question_2" class=""></div>
+                                        <div id="question_3" class=""></div>
+                                        <div id="question_4" class=""></div>
+                                        <div id="question_5" class=""></div>
+                                        <div id="question_6" class=""></div>
+                                        <div id="question_7" class=""></div>
+                                        <div id="question_8" class=""></div>
+                                        <div id="question_9" class=""></div>
+                                        <div id="question_10" class=""></div>
+                                        <div id="criar-tarefa-ferramentas" class="form-group">
+                                            <label class="control-label col-sm-3"></label>
+                                            <div class="col-sm-9">
+                                                <div id="ferramentas_genericas" class="create-task">
+                                                    <button onclick="createNewQuestion()" class="btn btn-primary btn-sm" type="button"
+                                                            data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Adiciona uma questão do tipo 'objetiva' ao seu questionario.">
+                                                        +1 Questão
+                                                    </button>
+                                                    <button id="button_add_item" class="btn btn-primary btn-sm"
+                                                            onclick="addItemQuestion()" type="button" data-toggle="tooltip"
+                                                            data-placement="top"
+                                                            title="Adicionar +1 item a esta questão.">+1 Item
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">Referências</label>
+                                            <div class="col-sm-7">
+                                            <textarea id="references" class="form-control" name="references" maxlength="300" placeholder="Disponibilize aqui links de sites ou nomes de livros."></textarea>
+                                                <small>
+                                                    Use este campo para adicionar links de sites ou nomes de livros que poderão ser
+                                                    utilizados como fontes de pesquisas ou referências de estudo para resolução desta tarefa.
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="form-group">
+                                            <div class="col-sm-7"></div>
+                                            <div class="col-sm-3">
+                                                <input class="form-control btn-primary" type="submit" value="Criar"/>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="div-create-tasks-now-off" class="panel-body hide">
+                                    <p class='text-center'> Você precisa estar associado à turma(s) para criar tarefas. Isso pode ser feito através do painel <code>Turma &gt; Definir nova </code></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="teacher-panel-students" role="tabpanel" class="tab-pane fade in panel-div-tab"
+                             aria-labelledby="teacher-panel-students-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">Gerencie seus alunos. Acompanhe todo o histórico e desempenho.</div>
+                                <div class="panel-body">
+                                    <form class="form-horizontal" method="post">
+                                        <div class="form-group">
+                                            <div class="col-sm-3"></div>
+                                            <div class="input-group col-sm-7">
+                                                <input type="text" data-tb-target="panel-table-students" class="form-control input-system-search" placeholder="Procurar aluno" required>
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" name="fetch" value="by_name"><i
+                                            class="glyphicon glyphicon-search"></i></button>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Table -->
+                                <table id="panel-table-students" class="table table-bordered table-striped table-list-search">
+                                    <thead>
+                                    <tr>
+                                        <th>Matrícula/ID</th>
+                                        <th>Turma</th>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tbody_students"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- recebe paginação desta tabela -->
+                            <div id="div-pagination-panel-tch-stds" class="row text-center"></div>
+
+                        </div>
+                        <div id="teacher-panel-teach-currents" role="tabpanel" class="tab-pane fade in panel-div-tab"
+                             aria-labelledby="teacher-panel-teach-currents-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <p>
+                                        Estes são dados referentes as turmas e as disciplinas que você está relacionado atualmente.
+                                    </p>
+                                    <small><b>Atenção:</b> Caso você não esteja relacionado a nenhuma turma em nosso sistema, você <b>não</b> poderá criar novas tarefas.</small>
+                                </div>
+                                <div class="panel-body">
+                                    <form id="form_register" class="form-horizontal" method="post">
+                                        <div class="form-group">
+                                            <div class="col-sm-3"></div>
+                                            <div class="input-group col-sm-7">
+                                                <input type="text" data-tb-target="tb-panel-teacher-studentsall" class="form-control input-system-search" placeholder="Procurar aluno" required>
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" name="fetch" value="by_name"><i
+                                            class="glyphicon glyphicon-search"></i></button>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Table -->
+                                <table id="tb-panel-teacher-studentsall" class="table table-bordered table-striped table-list-search">
+                                    <thead>
+                                    <tr>
+                                        <th>Escola</th>
+                                        <th>Curso</th>
+                                        <th>Turma</th>
+                                        <th>Disciplina</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tbody_teachs"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="teacher-panel-teach-new" role="tabpanel" class="tab-pane fade in panel-div-tab"
+                             aria-labelledby="teacher-panel-teach-new-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <p>
+                                        Defina uma "relação" para exercer atividades no sistema.
+                                    </p>
+                                    <small><b>Atenção:</b> Caso você não esteja relacionado a nenhuma turma em nosso sistema, você <b>não</b> poderá criar novas tarefas.</small>
+                                </div>
+                                <br/>
+                                <div class="panel-body">
+                                    <form id="form_createTeach" class="form-horizontal" action="" method="post">
+                                        <!-- compos destinados ao cadastro de alunos -->
+                                        <div class="form-group">
+                                            <label for="escolas-disponiveis-panel_prof" class="control-label col-sm-3">Escola</label>
+                                            <div class="col-sm-5">
+                                                <select id="escolas-disponiveis-panel_prof" name="leciona_escola" required class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <div id="div-lecionar-serie" class="div-lecionar-nova form-group">
+                                            <label for="series-disponiveis-panel_prof" class="control-label col-sm-3">Curso</label>
+                                            <div class="col-sm-5">
+                                                <select id="series-disponiveis-panel_prof" name="leciona_curso" required class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <div id="div-lecionar-turma" class="div-lecionar-nova form-group">
+                                            <label for="turmas-disponiveis-panel_prof" class="control-label col-sm-3">Turma</label>
+                                            <div class="col-sm-5">
+                                                <select id="turmas-disponiveis-panel_prof" name="leciona_turma" required class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lecionar_diciplina" class="control-label col-sm-3">Disciplina</label>
+
+                                            <div class="col-sm-5">
+                                                <select id="lecionar_diciplina" name="leciona_diciplina" required class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3"></div>
+                                            <div class="col-sm-5">
+                                                <input type="submit" class="form-control btn-primary" value="Definir">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim .row 1 -->
+        </div> <!-- fim div .container -->
+        <footer class="footer">
+            <span>&#169; Homework 2016</span>
+        </footer>
+    </body>
 </html>
