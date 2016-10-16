@@ -12,6 +12,7 @@
         <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
         <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
         <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
         <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
         <!-- Scripts -->
         <!--[if lt IE 9]>
@@ -64,7 +65,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-edit"></span> João Professor <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="http://localhost/user/profile">Perfil</a></li>
+                                <li><a href="#" onclick="alert('Nada aqui -> http://localhost/user/profile')">Perfil</a></li>
                                 <li><a href="http://localhost/user/notification">Notificações <span id="num-notification" class="badge"></span></a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="http://localhost/user/logout">Sair</a></li>
@@ -78,7 +79,7 @@
 
         <script type="text/javascript">
             // Carregar tarefas atuais
-            listTasks();
+            getTasks();
         </script>
         <div class="container"><!-- .container -->
             <div class="row"> <!-- .row 1 -->
@@ -89,7 +90,7 @@
                                aria-controls="myTabDrop2-contents">Tarefas <span class="caret"></span></a>
                             <ul class="dropdown-menu" aria-labelledby="myTabDrop2" id="myTabDrop2-contents">
                                 <li class="active">
-                                    <a id="teacher-panel-current-tasks-tab" onclick="listTasks()" href="#teacher-panel-current-tasks" role="tab"
+                                    <a id="teacher-panel-current-tasks-tab" onclick="getTasks()" href="#teacher-panel-current-tasks" role="tab"
                                        data-toggle="tab" aria-controls="teacher-panel-current-tasks" aria-expanded="true">Tarefas atuais</a>
                                 </li>
                                 <li>
@@ -145,14 +146,14 @@
                                     <b>Atenção:</b>
                                     <ul>
                                         <li>
-                                            <small>Tarefas só poderão ser editadas se a "situação" da mesma encontra-se no
-                                                estado <b>" OFF (Indisponível) "</b> para alunos.</small>
+                                            <small>Tarefas poderão ser editadas posteriormente.</small>
                                         </li>
                                         <li>
-                                            <small>Uma vez <b>disponibilizada</b>, esta tarefa não poderá ser "editada" novamente.</small>
-                                        </li>
-                                        <li>
-                                            <small>Existe um limite máximo de <b>15</b> questões para cada tarefa.</small>
+                                            <small>Existe um limite máximo de <b id="qst-qtd"></b> questões para cada tarefa.</small>
+                                            <script type="text/javascript">
+                                                // Informar quantidade limite de questões dinâmicamente
+                                                $('#qst-qtd').html(NUM_LIMIT_QUESTIONS);
+                                            </script>
                                         </li>
                                     </ul>
                                 </div>
@@ -178,11 +179,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="team" class="control-label col-sm-3">Turma</label>
+                                            <label for="panel-create-task-select-team" class="control-label col-sm-3">Turma</label>
                                             <div class="col-sm-4">
-                                                <select id="team" name="team" required class="form-control">
-                                                    <option value="0">Selecione a Turma...</option>
-                                                </select>
+                                                <select id="panel-create-task-select-team" name="team" required class="form-control"></select>
                                                 <small>
                                                     <b>Turma</b>: Especifique para qual turma este questionário deve ser aplicado.
                                                 </small>
@@ -205,15 +204,12 @@
                                             <div class="col-sm-9">
                                                 <div id="ferramentas_genericas" class="create-task">
                                                     <button onclick="createNewQuestion()" class="btn btn-primary btn-sm" type="button"
-                                                            data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title="Adiciona uma questão do tipo 'objetiva' ao seu questionario.">
+                                                            data-toggle="tooltip" data-placement="top" title="Adicionar questão">
                                                         +1 Questão
                                                     </button>
                                                     <button id="button_add_item" class="btn btn-primary btn-sm"
                                                             onclick="addItemQuestion()" type="button" data-toggle="tooltip"
-                                                            data-placement="top"
-                                                            title="Adicionar +1 item a esta questão.">+1 Item
+                                                            data-placement="top" title="Adicionar item a esta questão">+1 Item
                                                     </button>
                                                 </div>
                                             </div>
@@ -221,7 +217,7 @@
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">Referências</label>
                                             <div class="col-sm-7">
-                                            <textarea id="references" class="form-control" name="references" maxlength="300" placeholder="Disponibilize aqui links de sites ou nomes de livros."></textarea>
+                                            <textarea id="references" class="form-control" name="references" maxlength="300" placeholder="Disponibilize fontes de pesquisa: links, livros, etc..."></textarea>
                                                 <small>
                                                     Use este campo para adicionar links de sites ou nomes de livros que poderão ser
                                                     utilizados como fontes de pesquisas ou referências de estudo para resolução desta tarefa.
@@ -232,7 +228,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-7"></div>
                                             <div class="col-sm-3">
-                                                <input class="form-control btn-primary" type="submit" value="Criar"/>
+                                                <input class="form-control btn-primary" type="submit" value="Concluir"/>
                                             </div>
                                             <div class="col-sm-2"></div>
                                         </div>
@@ -375,6 +371,13 @@
                 </div>
             </div> <!-- fim .row 1 -->
         </div> <!-- fim div .container -->
+
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="popover"]').popover();
+            });
+        </script>
+
         <footer class="footer">
             <span>&#169; Homework 2016</span>
         </footer>

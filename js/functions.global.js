@@ -145,3 +145,7 @@ function formatPaginationPanel(divPgHtmlId, qtd, pgCurrent, titleFunction) {
     divPg += '</ul>';
     $(divPgHtmlId).html(divPg);
 }
+
+$(document).ready(function (){
+    $('[data-toggle="tooltip"]').tooltip();
+});

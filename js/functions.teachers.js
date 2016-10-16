@@ -7,6 +7,8 @@ function validationCreateTask() {
         if (showPanelCreateTasks) {
             $('#div-create-tasks-now').removeClass('hide');
             $('#div-create-tasks-now-off').addClass('hide');
+            // Preencher select do painel
+            setSelectToCreateTask();
         } else {
             $('#div-create-tasks-now').addClass('hide');
             $('#div-create-tasks-now-off').removeClass('hide');
@@ -30,10 +32,10 @@ function validationCreateTask() {
  *
  * @param data
  */
-function formatListTasks(data) {
+function formatGetTasks(data) {
     var dataHtml = '';
     // set com debug
-    data = setValuesToDebug(data, 'testListTasks');
+    data = setValuesToDebug(data, 'testGetTasks');
     // formatar botões de edição de tarefas
     var getBtnEdition = function (i, data, indicator) {
         // tornar botão ativo se esta tarefa está ativa
@@ -69,16 +71,16 @@ function formatListTasks(data) {
 /**
  * Retornar lista de tarefas atuais
  */
-function listTasks() {
+function getTasks() {
     $.ajax({
-        url: urlAjaxRequest['listTasks'],
+        url: urlAjaxRequest['getTasks'],
         type: "POST",
         dataType: "json",
         success: function (data) {
-            formatListTasks(data);
+            formatGetTasks(data);
         },
         error: function (data) {
-            formatListTasks(data);
+            formatGetTasks(data);
         }
     })
 }
@@ -179,7 +181,8 @@ var addQuestObjective = function () {
         '<span class="input-group-addon">' + items[1] + '</span>' +
         '<span class="input-group-addon">' +
         '<input name="item_' + items[1] + '_response_qst_' + idQuestion +
-        '" type="checkbox" aria-label="..."></span>' +
+        '" type="checkbox" data-toggle="tooltip" data-placement="top" title="Resposta?" style="cursor:pointer" ' +
+        ' aria-label="..."></span>' +
         '<input name="item_' + items[1] + '_description_qst_' + idQuestion +
         '" type="text" class="form-control" aria-label="..." placeholder="Descreva' +
         ' o enunciado do item"></div>' +
@@ -187,7 +190,8 @@ var addQuestObjective = function () {
         '<span class="input-group-addon">' + items[2] + '</span>' +
         '<span class="input-group-addon">' +
         '<input name="item_' + items[2] + '_response_qst_' + idQuestion +
-        '" type="checkbox" aria-label="..."></span>' +
+        '" type="checkbox" data-toggle="tooltip" data-placement="top" title="Resposta?" style="cursor:pointer" ' +
+        ' aria-label="..."></span>' +
         '<input name="item_' + items[2] + '_description_qst_' + idQuestion +
         '" type="text" class="form-control" aria-label="..." placeholder="' +
         'Descreva o enunciado do item" ></div>' +
@@ -195,20 +199,20 @@ var addQuestObjective = function () {
         'class="input-group item-quest"></div>' +
         '<div id="item_' + items[4] + '_qst_' + idQuestion + '" ' +
         'class="input-group item-quest"></div>' +
+            // todo -> Obs aqui ficou limitado a 5 itens, alterar posteriormente maneira de agregação
         '<div id="item_' + items[5] + '_qst_' + idQuestion + '" ' +
         'class="input-group item-quest"></div>' +
         '</div>' +
         '<div class="col-sm-1">' +
-        '<input class="form-control" type="number" name="question_' +
-        idQuestion + '_points" title="Quantidade de pontos." min="1" ' +
+        '<input data-toggle="tooltip" data-placement="top" title="Pontos" ' +
+        ' class="form-control" type="number" name="question_' +
+        idQuestion + '_points" min="1" ' +
         'max="10" value="1" placeholder="Pontos." required />' +
-        '</div>' +
-        '<div class="col-sm-1">' +
+        '</div><div class="col-sm-1">' +
         '<button class="btn btn-default btn-sm" onclick="dropQuestion(' +
         idQuestion + ')" type="button" data-toggle="tooltip" data-placement="top" ' +
-        'title="Descartar questão."><span class="glyphicon glyphicon-trash">' +
-        '</span></button>' +
-        '</div>';
+        'title="Descartar"><span class="glyphicon glyphicon-trash">' +
+        '</span></button></div><script>$(\'[data-toggle="tooltip"]\').tooltip()</script>';
 };
 
 /**
@@ -225,10 +229,12 @@ function addItemQuestion() {
         var itemHtml = '<span class="input-group-addon">' + items[countItems] + '</span>' +
             '<span class="input-group-addon">' +
             '<input name="item_' + items[countItems] + '_response_qst_' +
-            idQuestion + '" type="checkbox" aria-label="..." required /></span>' +
+            idQuestion + '" type="checkbox" aria-label="..." required ' +
+            ' data-toggle="tooltip" data-placement="top" title="Resposta?" style="cursor:pointer" /></span>' +
             '<input name="item_' + items[countItems] + '_description_qst_' +
             idQuestion + '" type="text" class="form-control" aria-label="..." ' +
-            ' placeholder="Descreva o enunciado do item" required />';
+            ' placeholder="Descreva o enunciado do item" required />' +
+            '<script>$(\'[data-toggle="tooltip"]\').tooltip()</script>';
         $(idLocal).html(content + itemHtml);
     }
 }
@@ -251,7 +257,7 @@ function createNewQuestion() {
         // indicar que mais uma questão acaba de ser criada
         countQuestions++;
         // setar conteudo
-        $(contentQuestionsId).html(addQuestObjective());
+        $(contentQuestionsId).html(addQuestObjective()).addClass('animated fadeInDown');
     } else {
         bootbox.alert('Limite de questões foi atingido.');
     }
@@ -265,16 +271,16 @@ function createNewQuestion() {
 function dropQuestion(questionId) {
     bootbox.confirm("Deseja realmente excluir esta questão?", function (result) {
         if (result) {
-            // efetuar ações
-            var id = "#question_" + questionId;
-            // remove componentes do formulario
-            $(id).html("");
-            // atualiza labels de descrição
-            updateLabelsQuestions();
+            var idHtml = "#question_" + questionId;
             // oculta a div
-            $(id).hide();
-            // indicar que uma questão acaba de ser removida
-            countQuestions--;
+            $(idHtml).removeClass('animated fadeInDown')
+                .addClass('animated fadeOutUp');
+            setTimeout(function () {
+                $(idHtml).html("");
+                updateLabelsQuestions();
+                $(idHtml).slideUp();//.hide();
+            }, 1000);
+            countQuestions--;// indicar que uma questão acaba de ser removida
         }
     });
 }
@@ -337,5 +343,44 @@ function getStudents() {
         error: function (data) {
             formatTableStudents(data);
         }
+    });
+}
+
+/**
+ * Retorna Turmas do professor
+ *
+ * @param handleData
+ */
+function getTeams(handleData) {
+    $.ajax({
+        url: urlAjaxRequest['getTeams'],
+        type: "POST",
+        dataType: "json",
+        success: function (data) {
+            if (data[0] != undefined) {
+                handleData(setValuesToDebug(data, 'testGetTeams'))
+            } else {
+                handleData(setValuesToDebug([], 'testGetTeams'))
+            }
+        },
+        error: function (data) {
+            handleData(setValuesToDebug(data, 'testGetTeams'));
+        }
+    });
+}
+
+/**
+ * Listar em Select opções de turmas disponíveis para este professor
+ *
+ * Obs: Componente presente no painel de criação de tarefas
+ */
+function setSelectToCreateTask() {
+    getTeams(function (data) {
+        // options HTML
+        var dataOptionsHtml = '<option value="0">Selecione a turma...</option>';
+        for (var i=0; data[i] != undefined; i++) {
+            dataOptionsHtml += '<option value="'+ data[i]['id'] +'">'+ data[i]['description'] +'</option>';
+        }
+        $('#panel-create-task-select-team').html(dataOptionsHtml);
     });
 }

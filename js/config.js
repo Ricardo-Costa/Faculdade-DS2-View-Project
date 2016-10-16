@@ -3,51 +3,105 @@
  */
 
 
-/** Url padrão */
-// const BASE_URL = 'http://' + location.host + '/';
-const BASE_URL = 'http://localhost/';
-// todo - definir url base de validações;
-// todo Ex: http://localhost/nome-servico/nome-recurso
-// todo Ex: http://localhost/validation/cpf -> se é um numero de cpf válido...
-// todo Ex: http://localhost/validation/email -> se email a ser cadastrado nao existe no sistema...
+/**
+ * Define URL base do sistema
+ *
+ * @type {string}
+ */
+const BASE_URL = 'http://localhost/';// todo -> http://' + location.host + '/'
+
+/**
+ * Define URL base para validações
+ *
+ * Ex: http://localhost/validation/cpf
+ *
+ * @type {string}
+ */
 const BASE_URL_VALIDATION = BASE_URL + 'validation/';
 
 
-// Requisições definidas em modo POST
-
-// todo - definir urls de validações
+/**
+ * Configura URL's de Validações
+ *
+ * @type {{validationCPF: string, validationEmail: string, validationPhone: string, validationCreateTask: string}}
+ */
 urlFormValidations = {
-    'cpf' : BASE_URL_VALIDATION + 'cpf',// validação de número de cpf
-    'email' : BASE_URL_VALIDATION + 'email',// Verifica se email NÃO existe no sistema
-    'phone' : BASE_URL_VALIDATION + 'phone',// Verifica se número de telefone NÃO existe no sistema
-    'createTask' : BASE_URL_VALIDATION + 'create-task',// Verifica se professor em questão possui no mínimo uma "turma", ...dado necessário para criaçao de tarefas
+    // Validação de número de cpf
+    // Obs: Dado submetido em POST, nome da variavel: "cpf"
+    // Obs2: Deve verificar se numero de cpf é válido
+    'validationCPF'         : BASE_URL_VALIDATION + 'cpf',
+
+    // Verifica se email NÃO existe no sistema
+    'validationEmail'       : BASE_URL_VALIDATION + 'email',
+
+    // Verifica se número de telefone NÃO existe no sistema
+    'validationPhone'       : BASE_URL_VALIDATION + 'phone',
+
+    // Verifica se professor possui os requisitos mínimos para criação de uma Tarefa
+    // Obs: Professor precisa ter no mínimo uma turma definida, e 1/n Alunos relacionados a esta.
+    'validationCreateTask'  : BASE_URL_VALIDATION + 'create-task',
+
 }
 
-// todo - definir urls recebimmento de dados de formulários
+
+/**
+ * Configura URL's para recebimento de dados de formulários
+ *
+ * @type {{formRegisterUser: string, formResendPassword: string}}
+ */
 urlFormActions = {
-    'userRegister' : BASE_URL + 'user/register',// Registro de usuários
-    'passRedefinition' : BASE_URL + 'user/re-password',// Redefinição de senha do usuário
+
+    // Registro de usuários
+    // Obs: Dados submetidos com POST
+    'formRegisterUser'  : BASE_URL + 'user/register',
+
+    // Reenvio de senha para email do usuário
+    'formResendPassword': BASE_URL + 'user/resend-password',
+
 }
 
-// todo - definir urls de requerimentos "implícitos"
+
+/**
+ * Configura URL's para requisições "implícitas" realizadas pelo próprio sistema
+ *
+ * @type {{getTasks: string, getTask: string, getStudents: string, getTeams: string}}
+ */
 urlAjaxRequest = {
-    'listTasks' : BASE_URL + 'teacher/listTasks',// Listar todas as tarefas atuais do professor
-    'getTask' : BASE_URL + 'teacher/getTask',// Buscar tarefa via id desta
-    'getStudents' : BASE_URL + 'teacher/getStudents',// Buscar Alunos
+
+    // Listar todas as tarefas atuais do professor
+    'getTasks'      : BASE_URL + 'teacher/list-tasks',
+
+    // Buscar todos os dados da Tarefa criada pelo professor
+    // Obs: esta requisição envia em POST a variável "task_id"
+    'getTask'       : BASE_URL + 'teacher/task',
+
+    // Buscar Alunos relacionados ao professor
+    'getStudents'   : BASE_URL + 'teacher/list-students',
+
+    // Buscar todas as turmas definidas pelo professor
+    'getTeams'      : BASE_URL + 'teacher/list-teams',
+
 }
 
 
-/** Dados de usuários */
+/**
+ * Deve ser configurado o Tipo/Perfil dos usuários.
+ *
+ * Obs: Apenas os que são diferentes de Administrador.
+ *
+ * @type {string}
+ */
 const
     USER_STUDENT = '2',
     USER_TEACHER = '3';
 
-/** Estados de usuários */
+/**
+ * Definição de mensagens de errors do sistema
+ *
+ * @type {string}
+ */
 const
-    STATUS_INACTIVE = '0',
-    STATUS_ACTIVE = '1';
-
-const MSG_ALERT_ERROR = 'Erro ao tentar executar processo.';
+    MSG_ALERT_ERROR = 'Erro ao tentar executar processo.';
 
 
 /**
@@ -91,7 +145,7 @@ function setValuesToDebug(defaultValue, keyValueTest) {
     if (systemDebugRequest) {
         var data = {
             // dados básicos para apresentação da lista de tarefas do painel de professores
-            'testListTasks' : [
+            'testGetTasks' : [
                 {
                     "id" : 1 ,
                     "summary" : "Tarefa de Matemática definida em: 14-10-2016 15:03 - Data prevista para encerramento: 15-10-2016 10:00",
@@ -176,6 +230,15 @@ function setValuesToDebug(defaultValue, keyValueTest) {
                     "team" : "Turma de DS2",
                     "name" : "Kaio Teste",
                     "email" : "kaio@mail.com"
+                },
+            ],
+            // Buscar todas as turmas deste professor
+            'testGetTeams' : [
+                {
+                    "id" : 1, "description" : "Turma de POO", "teacher" : 1
+                },
+                {
+                    "id" : 2, "description" : "Turma de Matemática", "teacher" : 1
                 },
             ]
         };
