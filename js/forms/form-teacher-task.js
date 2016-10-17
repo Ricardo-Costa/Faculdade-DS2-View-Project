@@ -1,16 +1,18 @@
 /**
  * Created by Ricardo on 14/10/2016.
  */
-// formulário de criação de tarefas"
-$(formId_createTask).ajaxForm({
-    url: BASE_URL + 'teacher/createNewTask',
+
+// formulário de criação de tarefas
+var formCreateTask = '#form-create-task';
+$(formCreateTask).ajaxForm({
+    url: urlFormActions['formCreateTask'],
     type: "POST",
     dataType: "json",
     success: function (e) {
         if (e['return'] != undefined) {
             if (e['return'] == true) {
                 bootbox.alert(e['message'], function () {
-                    $(formId_createTask).resetForm();
+                    $(formCreateTask).resetForm();
                     window.location.assign(BASE_URL);
                 });
             } else {
@@ -21,21 +23,21 @@ $(formId_createTask).ajaxForm({
         }
     },
     error: function () {
-        bootbox.alert(getMessage());
-        // $(formId_createTask).resetForm();
+        bootbox.alert(MSG_ALERT_ERROR);
     }
 });
-delete (formId_createTask);
+delete (formCreateTask);
 
 // formulário de edição de tarefas
-$(formId_editTask).ajaxForm({
-    url: BASE_URL + 'teacher/updateDataTask',
+var formUpdateTask = '#form-update-task';
+$(formUpdateTask).ajaxForm({
+    url: urlFormActions['formUpdateTask'],
     type: "POST",
     dataType: "json",
     success: function (e) {
         if (e['return'] != undefined) {
             if (e['return'] == true) {
-                $(formId_editTask).resetForm();
+                $(formUpdateTask).resetForm();
                 bootbox.alert(e['message'], function () {
                     window.location.assign(BASE_URL);
                 });
@@ -43,11 +45,11 @@ $(formId_editTask).ajaxForm({
                 bootbox.alert(e['message']);
             }
         } else {
-            bootbox.alert(getMessage());
+            bootbox.alert(MSG_ALERT_ERROR);
         }
     },
     error: function () {
-        bootbox.alert(getMessage());
+        bootbox.alert(MSG_ALERT_ERROR);
     }
 });
-delete (formId_editTask);
+delete (formUpdateTask);

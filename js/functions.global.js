@@ -1,12 +1,6 @@
 /**
  * Created by Ricardo on 12/10/2016.
  */
-function setMessage(msg) {
-    message = msg;
-}
-function getMessage() {
-    return window.message;
-}
 
 /**
  * Obter seguimentos de url corrente

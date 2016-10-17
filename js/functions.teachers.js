@@ -40,7 +40,7 @@ function formatGetTasks(data) {
     var getBtnEdition = function (i, data, indicator) {
         // tornar botão ativo se esta tarefa está ativa
         return (!data[i]['finished'])?
-        '<button title="Editar Tarefa" onclick="editTask('+ data[i]['id'] +')" ' +
+        '<button data-toggle="tooltip" data-placement="top" title="Editar Tarefa" onclick="editTask('+ data[i]['id'] +')" ' +
         ' id="btn-edt-task-'+ indicator +'" type="button" class="btn btn-primary btn-sm" ' +
         ' onclick="alert(\'aki sim :D\')"><span class="glyphicon ' +
         ' glyphicon-pencil"></span></button>' :
@@ -52,10 +52,10 @@ function formatGetTasks(data) {
     for (var i = 0; data[i] != undefined; i++) {
         // formando conteúdo
         dataHtml += '<li class="title-li-tasks"><div class="tasks-def"><div class="tasks-bnts">' +
-            ' <button title="Visualizar" type="button" class="btn btn-primary ' +
+            ' <button data-toggle="tooltip" data-placement="top" title="Visualizar" type="button" class="btn btn-primary ' +
             ' btn-sm" onclick="getTask(' + data[i]['id'] + ', ' + (i + 1) + ');">' +
             '<span class="glyphicon glyphicon-search"></span></button> ' + getBtnEdition(i, data, (i + 1)) +
-            ' <button title="Avaliar Respostas" type="button" class="btn btn-primary ' +
+            ' <button data-toggle="tooltip" data-placement="top" title="Avaliar Respostas" type="button" class="btn btn-primary ' +
             ' btn-sm" onclick="alert(\'Buscar respostas...\')//evaluateQuestions">' +
             '<span class="glyphicon glyphicon-list-alt"></span></button> ' +
             '</div><div class="tasks-summary" '+ ((data[i]['finished'])? 'style="opacity: 0.6"' : '')
@@ -64,7 +64,9 @@ function formatGetTasks(data) {
                 ' - <span class="label label-success">Em andamento</span></span>') + '</div></div></li>' +
             '<div id="container-data-task-' + (i + 1) + '" class="container-data-task"></div>';
     }
-    $('#teacher-panel-currents-tasks').html(dataHtml).show();
+    $('#teacher-panel-currents-tasks').html(dataHtml +
+            '<script type="text/javascript">$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})' +
+        '</script>').show();
     delete (dataHtml);
 }
 
@@ -83,6 +85,14 @@ function getTasks() {
             formatGetTasks(data);
         }
     })
+}
+
+/**
+ * Realizar edição de tarefa
+ */
+function editTask(taskId) {
+    alert('Redirecionar para página de Edição de tarefas...\n' +
+        'Buscar em POST "task_id" : ' + taskId);
 }
 
 /**
@@ -185,7 +195,7 @@ var addQuestObjective = function () {
         ' aria-label="..."></span>' +
         '<input name="item_' + items[1] + '_description_qst_' + idQuestion +
         '" type="text" class="form-control" aria-label="..." placeholder="Descreva' +
-        ' o enunciado do item"></div>' +
+        ' o enunciado do item" required /></div>' +
         '<div class="input-group item-quest">' +
         '<span class="input-group-addon">' + items[2] + '</span>' +
         '<span class="input-group-addon">' +
@@ -194,7 +204,7 @@ var addQuestObjective = function () {
         ' aria-label="..."></span>' +
         '<input name="item_' + items[2] + '_description_qst_' + idQuestion +
         '" type="text" class="form-control" aria-label="..." placeholder="' +
-        'Descreva o enunciado do item" ></div>' +
+        'Descreva o enunciado do item" required /></div>' +
         '<div id="item_' + items[3] + '_qst_' + idQuestion + '" ' +
         'class="input-group item-quest"></div>' +
         '<div id="item_' + items[4] + '_qst_' + idQuestion + '" ' +
@@ -229,7 +239,7 @@ function addItemQuestion() {
         var itemHtml = '<span class="input-group-addon">' + items[countItems] + '</span>' +
             '<span class="input-group-addon">' +
             '<input name="item_' + items[countItems] + '_response_qst_' +
-            idQuestion + '" type="checkbox" aria-label="..." required ' +
+            idQuestion + '" type="checkbox" aria-label="..." ' +
             ' data-toggle="tooltip" data-placement="top" title="Resposta?" style="cursor:pointer" /></span>' +
             '<input name="item_' + items[countItems] + '_description_qst_' +
             idQuestion + '" type="text" class="form-control" aria-label="..." ' +
@@ -318,12 +328,20 @@ function formatTableStudents(data) {
                 dataHtml += '<tr><td>' + data[i]['id'] + '</td>' +
                     '<td>' + data[i]['team'] + '</td>' +
                     '<td>' + data[i]['name'] + '</td>' +
-                    '<td>' + data[i]['email'] + '</td></tr>';
+                    '<td>' + data[i]['email'] + '</td>' +
+                    '<td>' +
+                    '<button class="btn btn-default btn-sm" onclick="alert(\'Requisitar confirmação aqui...\')"' +
+                    'data-toggle="tooltip" data-placement="top" title="Desvincular">' +
+                    '<span class="glyphicon glyphicon-minus"></span></button>' +
+                    '</td>' +
+                    '</tr>';
             } else {
                 break;
             }
         }
-        $('#tbody_students').html(dataHtml);
+        $('#tbody-list-students').html(dataHtml +
+            '<script type="text/javascript">$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})' +
+            '</script>');
         // setar paginaçao desta tabela
         formatPaginationPanel('#div-pagination-panel-tch-stds', qtd, 1, 'pgPnTchTbStds');
     }
@@ -377,10 +395,32 @@ function getTeams(handleData) {
 function setSelectToCreateTask() {
     getTeams(function (data) {
         // options HTML
-        var dataOptionsHtml = '<option value="0">Selecione a turma...</option>';
+        //var dataOptionsHtml = '<option value="0">Selecione a turma...</option>';
+        var dataOptionsHtml = '';
         for (var i=0; data[i] != undefined; i++) {
             dataOptionsHtml += '<option value="'+ data[i]['id'] +'">'+ data[i]['description'] +'</option>';
         }
         $('#panel-create-task-select-team').html(dataOptionsHtml);
+    });
+}
+
+function listTeams() {
+    getTeams(function (data) {
+        // options HTML
+        var dataHtml = '';
+        for (var i=0; data[i] != undefined; i++) {
+            dataHtml += '<tr>' +
+                '<td>'+ data[i]['id'] +'</td><td>'+ data[i]['description'] +'</td>' +
+                '<td>'+ data[i]['quantity_students'] +'</td>' +
+                '<td>' +
+                '<button class="btn btn-default btn-sm" onclick="alert(\'Requisitar confirmação aqui...\')"' +
+                'data-toggle="tooltip" data-placement="top" title="Desfazer">' +
+                '<span class="glyphicon glyphicon-trash"></span></button>' +
+                '</td>' +
+                '</tr>';
+        }
+        $('#tbody_list_teams').html(dataHtml +
+            '<script type="text/javascript">$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})' +
+            '</script>');
     });
 }

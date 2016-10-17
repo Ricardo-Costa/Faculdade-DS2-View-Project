@@ -1,22 +1,29 @@
 /**
  * Created by Ricardo on 14/10/2016.
  */
-// formulário de registro de turmas
-$(formId_defineNewTeam).ajaxForm({
-    url: BASE_URL + 'administrator/defineTeam',
+
+// formulário para Definição de Turmas
+var formDefineTeam = '#form-define-team';
+$(formDefineTeam).ajaxForm({
+    url: urlFormActions['formDefineTeam'],
     type: "POST",
     dataType: "json",
     success: function (e) {
         if (e['return'] != undefined) {
-            bootbox.alert(e['message']);
+            if (e['return'] == true) {
+                $(formDefineTeam).resetForm();
+                bootbox.alert(e['message'], function () {
+                    window.location.assign(BASE_URL);
+                });
+            } else {
+                bootbox.alert(e['message']);
+            }
         } else {
-            bootbox.alert(getMessage());
+            bootbox.alert(MSG_ALERT_ERROR);
         }
-        $(formId_defineNewTeam).resetForm();
     },
     error: function () {
-        bootbox.alert(getMessage());
-        $(formId_defineNewTeam).resetForm();
+        bootbox.alert(MSG_ALERT_ERROR);
     }
 });
-delete (formId_defineNewTeam);
+delete (formDefineTeam);

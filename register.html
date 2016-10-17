@@ -34,6 +34,7 @@
     <script type="text/javascript" src="js/others/bootstrap-waiting-for.js"></script>
     <script type="text/javascript" src="js/others/high-charts.js"></script>
     <script type="text/javascript" src="js/others/exporting.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap.table.filter.js"></script>
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/functions.global.js"></script>
     <script type="text/javascript" src="js/functions.teachers.js"></script>
@@ -53,7 +54,7 @@
 
 
                     <script type="text/javascript" src="js/forms/form-user-register.js"></script>
-                    <form id="form-user-register" class="form-horizontal" method="post" data-toggle="validator" role="form">
+                    <form id="form-register-user" class="form-horizontal" method="post" data-toggle="validator" role="form">
                         <div class="form-group">
                             <label for="select-user-type" class="control-label col-sm-3">Usuário</label>
                             <div class="col-sm-7">
@@ -61,12 +62,12 @@
                                     <option value="2">Aluno</option>
                                     <option value="3">Professor</option>
                                 </select>
-                                <div class="field-teacher-register">
+                                <div id="info-user-type-teacher">
                                     <span class="obs">*</span>
                                     <small>
                                         <b>Atenção:</b> Caso você crie uma conta de usuário do "tipo" professor,
                                         seus dados passarão por uma avaliação junto aos administradores do site,
-                                        <span onclick="$('#desc-terms').slideDown('slow');"
+                                        <span onclick="$('#desc-terms').slideDown('slow');$(event.target).fadeOut();"
                                               style="cursor:pointer;font-weight: bold; color: #23527c">(...)</span>
                                         <span style="display: none" id="desc-terms"> para mantermos um maior
                                             controle sobre as atividades internas realizadas no sistema.

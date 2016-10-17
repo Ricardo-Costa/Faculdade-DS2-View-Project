@@ -201,8 +201,7 @@ footer {
 #tb-profile {
     text-align: left;
 }
-/* ocultar campos */
-.field-teacher-register, .div-lecionar-nova {
+#info-user-type-teacher {
     display: none;
 }
 span.obs{

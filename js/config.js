@@ -51,12 +51,21 @@ urlFormValidations = {
  */
 urlFormActions = {
 
-    // Registro de usuários
+    // [ Página externa ] - Registro de usuários
     // Obs: Dados submetidos com POST
     'formRegisterUser'  : BASE_URL + 'user/register',
 
-    // Reenvio de senha para email do usuário
+    // [ Página externa ] - Reenvio de senha para email do usuário
     'formResendPassword': BASE_URL + 'user/resend-password',
+
+    // [ Painel de Definição de Turmas ] - Definição de novas turmas
+    'formDefineTeam': BASE_URL + 'teacher/define-team',
+
+    // [ Painel de Criação de Tarefas ] - Criar nova Tarefas
+    'formCreateTask': BASE_URL + 'teacher/create-task',
+
+    // [ Painel de Edição de Tarefas ] - Atualizar dados da Tarefas
+    'formUpdateTask': BASE_URL + 'teacher/create-task',
 
 }
 
@@ -101,23 +110,11 @@ const
  * @type {string}
  */
 const
-    MSG_ALERT_ERROR = 'Erro ao tentar executar processo.';
-
-
-/**
- *  Recebe ID HTML de formulário manipulado.
- *
- * @type {string}
- */
-var formCurrent = '';
+    MSG_ALERT_ERROR = 'Erro ao tentar realizar processo.';
 
 
 /** Recebe valores de Arrays para formação de tabelas em Paineis de usuários. */
 var mainArray = [];
-
-
-/** @var message - Mensagens de interação */
-var message = MSG_ALERT_ERROR; // mensagem pradrão de retorno
 
 
 $(document).ready(function () {
@@ -235,10 +232,10 @@ function setValuesToDebug(defaultValue, keyValueTest) {
             // Buscar todas as turmas deste professor
             'testGetTeams' : [
                 {
-                    "id" : 1, "description" : "Turma de POO", "teacher" : 1
+                    "id" : 1, "description" : "Turma de POO", "teacher" : 1, "quantity_students" : 12
                 },
                 {
-                    "id" : 2, "description" : "Turma de Matemática", "teacher" : 1
+                    "id" : 2, "description" : "Turma de Matemática", "teacher" : 1, "quantity_students" : 45
                 },
             ]
         };

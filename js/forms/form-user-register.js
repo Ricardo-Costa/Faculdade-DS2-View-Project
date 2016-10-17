@@ -6,37 +6,10 @@ $(document).ready(function () {
 
     var selectUser = $('#select-user-type');
     selectUser.change(function () {
-        // exibir e ocultar dados relevantes para o cadastro de professores
-        var showTeacherData = function (on) {
-            var formGroupCPF = $('#form-group-cpf'),
-                formGroupPhone = $('#form-group-phone'),
-                fieldTeacherRegister = $('.field-teacher-register');
-            if (on) {
-                formGroupCPF.slideDown();
-                formGroupPhone.slideDown();
-                fieldTeacherRegister.slideDown();
-            } else {
-                formGroupCPF.slideUp();
-                formGroupPhone.slideUp();
-                fieldTeacherRegister.slideUp();
-            }
-        }
-        // exibir e ocultar dados relevantes para o cadastro de alunos
-        var showStudentData = function (on) {
-            var formGroupsPasswords = $('.form-groups-passwords');
-            if (on) {
-                formGroupsPasswords.slideDown();
-            } else {
-                formGroupsPasswords.slideUp();
-            }
-        }
-        // Apresentar campos disponíveis para o cadastro deste usuários
-        if (selectUser.val() == USER_TEACHER) {
-            showTeacherData(true);
-            showStudentData(false);
-        } else if (selectUser.val() == USER_STUDENT) {
-            showTeacherData(false);
-            showStudentData(true);
+        if (selectUser.val() != USER_TEACHER) {
+            $('#info-user-type-teacher').slideUp();
+        } else {
+            $('#info-user-type-teacher').slideDown();
         }
     });
 
@@ -101,9 +74,9 @@ $(document).ready(function () {
     });
 
 
-    // formulário de registro
-    formCurrent = '#form-user-register';
-    $(formCurrent).submit(function (e) {
+    // formulário para registro de usuários
+    var formRegisterUser = '#form-register-user';
+    $(formRegisterUser).submit(function (e) {
         waitingDialog.show('Aguarde...');
         var postData = $(this).serializeArray();
         $.ajax({
@@ -115,7 +88,7 @@ $(document).ready(function () {
                 waitingDialog.hide();
                 if (e['return'] != undefined) {
                     if (e['return'] == true) {
-                        $(formCurrent).resetForm();
+                        $(formRegisterUser).resetForm();
                         bootbox.alert(e['message'], function () {
                             window.location.assign(BASE_URL);
                         })
@@ -123,15 +96,16 @@ $(document).ready(function () {
                         bootbox.alert(e['message']);
                     }
                 } else {
-                    bootbox.alert(getMessage());
+                    bootbox.alert(MSG_ALERT_ERROR);
                 }
             },
             error: function () {
                 waitingDialog.hide();
-                bootbox.alert(getMessage());
+                bootbox.alert(MSG_ALERT_ERROR);
             }
         });
         e.preventDefault();
     });
+    delete (formRegisterUser);
 
 });
