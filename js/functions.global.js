@@ -69,9 +69,9 @@ function formButtonToTable(c, setFunction, disabled) {
  */
 function checkCPF(_cpf, handleData) {
     $.ajax({
-        url: urlFormValidations['cpf'],
+        url: urlFormValidations['validationCPF'],
         type: "POST",
-        data: {cpf: _cpf},
+        data: { cpf : _cpf },
         dataType: "json",
         success: function (e) {
             handleData(e);
@@ -82,14 +82,14 @@ function checkCPF(_cpf, handleData) {
 /**
  * Verifica se Número de Telefone é válido
  *
- * @param phone
+ * @param _phone
  * @param handleData
  */
-function checkPhone( phone, handleData ) {
+function checkPhone(_phone, handleData ) {
     $.ajax({
-        url: urlFormValidations['phone'],
+        url: urlFormValidations['validationPhone'],
         type: "POST",
-        data: { telefone : phone },
+        data: { phone : _phone },
         dataType: "json",
         success: function (e) {
             handleData(e);
@@ -105,7 +105,7 @@ function checkPhone( phone, handleData ) {
  */
 function checkEmail(_email, handleData) {
     $.ajax({
-        url: urlFormValidations['email'],
+        url: urlFormValidations['validationEmail'],
         type: "POST",
         data: { email : _email },
         dataType: "json",

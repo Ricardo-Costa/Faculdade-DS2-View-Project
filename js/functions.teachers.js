@@ -15,7 +15,7 @@ function validationCreateTask() {
         }
     };
     $.ajax({
-        url: urlFormValidations['createTask'],
+        url: urlFormValidations['validationCreateTask'],
         type: "POST",
         dataType: "json",
         success: function (data) {

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+    <head>
+        <meta charset="utf-8">
+        <title>Homework - Panel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+        <!-- Le styles -->
+        <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+        <!-- Scripts -->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
+        <![endif]-->
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="/js/others/respond.min.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="js/others/jquery.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-validator.js"></script>
+        <script type="text/javascript" src="js/others/jquery.form.min.js"></script>
+        <script type="text/javascript" src="js/others/jquery.masked-input.js"></script>
+        <script type="text/javascript" src="js/others/moment-with-locales.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-date-time-picker.js"></script>
+        <script type="text/javascript" src="js/others/file-input.min.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-toggle.min.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-select.min.js"></script>
+        <script type="text/javascript" src="js/others/boot-box.min.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap-waiting-for.js"></script>
+        <script type="text/javascript" src="js/others/high-charts.js"></script>
+        <script type="text/javascript" src="js/others/exporting.js"></script>
+        <script type="text/javascript" src="js/others/bootstrap.table.filter.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
+        <script type="text/javascript" src="js/functions.global.js"></script>
+        <script type="text/javascript" src="js/functions.teachers.js"></script>
+        <script type="text/javascript" src="js/functions.students.js"></script>
+    </head>
+    <body>
+
+
+        <nav id="custom-bootstrap-menu" class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand font-system-name">Homework</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="http://localhost/student/panel">Painel</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user"></span> Aluno Teste <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="user-profile.html')">Perfil</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="http://localhost/user/logout">Sair</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+        <!-- <script type="text/javascript" src="js/forms/form-student-task.js"></script> -->
+        <script type="text/javascript">
+            // Necessária para carregar tarefas atuais do aluno...
+            // Obs.: Que foram encerradas
+            studentListFinishedTasks();
+        </script>
+
+        <div class="container"><!-- .container -->
+            <div class="row"> <!-- .row 1 -->
+                <div class="well">
+                    <ul id="student-panel-tab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="dropdown active">
+                            <a aria-expanded="false" href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Tarefas <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+                                <li class="active">
+                                    <a id="student-panel-finished-tasks-tab" onclick="studentListFinishedTasks()" href="#student-panel-finished-tasks" role="tab" data-toggle="tab" aria-controls="student-panel-finished-tasks" aria-expanded="true">Finalizadas</a>
+                                </li>
+                                <li>
+                                    <a id="student-panel-pending-tasks-tab" onclick="studentListPendingTasks()" href="#student-panel-pending-tasks" role="tab" data-toggle="tab" aria-controls="student-panel-pending-tasks" aria-expanded="true">Pendentes</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a aria-expanded="false" href="#" id="myTabDrop2" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop2-contents">Turmas <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDrop2" id="myTabDrop2-contents">
+                                <li>
+                                    <a id="student-panel-my-teams-tab" onclick="studentListTeams()" href="#student-panel-my-teams" role="tab" data-toggle="tab" aria-controls="student-panel-my-teams" aria-expanded="true">Participando</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div id="student-panel-tab-div" class="tab-content">
+                        <div id="student-panel-finished-tasks" role="tabpanel" class="tab-pane fade active in panel-div-tab" aria-labelledby="student-panel-finished-tasks-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <h4>Tarefas Finalizadas</h4>
+                                    <p>Esta é sua lista de atividades recentes.</p>
+                                    <ul>
+                                        <li>
+                                            Note que estas tarefas já excederam o prazo limite e encontram-se finalizadas.
+                                        </li>
+                                        <li>
+                                            Todas as tarefas que você ainda deve responder serão visulizadas na "aba <b>pendentes</b>".
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="student-div-finished-tasks" class="panel-body"></div>
+                            </div>
+                        </div>
+                        <div id="student-panel-pending-tasks" role="tabpanel" class="tab-pane fade in panel-div-tab" aria-labelledby="student-panel-pending-tasks-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <h4>Tarefas Pendentes</h4>
+                                    <p>
+                                        Esta é a lista de atividades disponibilizadas atualmente.
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            Fique atento ao <b>prazo</b> de envio.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="student-div-pendants-tasks" class="panel-body"></div>
+                            </div>
+                        </div>
+                        <div id="student-panel-my-teams" role="tabpanel" class="tab-pane fade in panel-div-tab" aria-labelledby="student-panel-my-teams-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <h4>Turmas</h4>
+                                    Estas são as Turmas que você está participando atualmente.
+                                </div>
+                                <div class="panel-body">
+                                    <form class="form-horizontal" action="#" method="get">
+                                        <div class="form-group">
+                                            <div class="col-sm-3"></div>
+                                            <div class="input-group col-sm-7">
+                                                <!-- <input type="hidden" name="action" value="discipline_consult"/> -->
+                                                <input name="q" type="search" data-tb-target="tb-students-my-teams" class="form-control input-system-search" placeholder="Procurar..." required>
+                                                <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" name="fetch" value="by_name"><i class="glyphicon glyphicon-search"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Table -->
+                                <table id="tb-students-my-teams" class="table table-bordered table-striped table-list-search">
+                                    <thead>
+                                    <tr>
+                                        <th>Turma</th>
+                                        <th>Professor</th>
+                                        <th>Opções</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tbody_MyTeams"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- fim .row 1 -->
+        </div> <!-- fim div .container -->
+
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="popover"]').popover();
+            });
+        </script>
+
+        <footer class="footer">
+            <span>&#169; Homework 2016</span>
+        </footer>
+    </body>
+</html>

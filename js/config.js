@@ -19,6 +19,19 @@ const BASE_URL = 'http://localhost/';// todo -> http://' + location.host + '/'
  */
 const BASE_URL_VALIDATION = BASE_URL + 'validation/';
 
+/**
+ * Define URL base da página onde o Aluno irá responder a Tarefa em questão
+ *
+ * Ex: http://localhost/student?responds_task={id-task}
+ *
+ * ...ou url amigavel:
+ *
+ * Ex: http://localhost/student/responds-task/{id-task}
+ *
+ * @type {string}
+ */
+const BASE_URL_STUDENT_RESPONDS_TASK = BASE_URL + 'student?responds_task=';
+
 
 /**
  * Configura URL's de Validações
@@ -39,7 +52,7 @@ urlFormValidations = {
 
     // Verifica se professor possui os requisitos mínimos para criação de uma Tarefa
     // Obs: Professor precisa ter no mínimo uma turma definida, e 1/n Alunos relacionados a esta.
-    'validationCreateTask'  : BASE_URL_VALIDATION + 'create-task',
+    'validationCreateTask'  : BASE_URL_VALIDATION + 'create-task'
 
 }
 
@@ -47,7 +60,10 @@ urlFormValidations = {
 /**
  * Configura URL's para recebimento de dados de formulários
  *
- * @type {{formRegisterUser: string, formResendPassword: string}}
+ * @type {{
+ * formRegisterUser: string, formRequestRePassword: string, formDefinePassword: string,
+ * formDefineTeam: string, formCreateTask: string, formUpdateTask: string
+ * }}
  */
 urlFormActions = {
 
@@ -55,8 +71,13 @@ urlFormActions = {
     // Obs: Dados submetidos com POST
     'formRegisterUser'  : BASE_URL + 'user/register',
 
-    // [ Página externa ] - Reenvio de senha para email do usuário
-    'formResendPassword': BASE_URL + 'user/resend-password',
+    // [ Página externa ] - Realizar solicitação de redefinição de nova senha
+    // Obs: Dados submetidos com POST
+    'formRequestRePassword': BASE_URL + 'user/request-re-password',
+
+    // [ Página externa ] - Realizar definição de nova senha do usuário
+    // Obs: Dados submetidos com POST
+    'formDefinePassword': BASE_URL + 'user/define-password',
 
     // [ Painel de Definição de Turmas ] - Definição de novas turmas
     'formDefineTeam': BASE_URL + 'teacher/define-team',
@@ -64,8 +85,11 @@ urlFormActions = {
     // [ Painel de Criação de Tarefas ] - Criar nova Tarefas
     'formCreateTask': BASE_URL + 'teacher/create-task',
 
-    // [ Painel de Edição de Tarefas ] - Atualizar dados da Tarefas
+    // [ Painel de Edição de Tarefas ] - Professor atualiza dados da Tarefas
     'formUpdateTask': BASE_URL + 'teacher/create-task',
+
+    // [ Painel de Conclusão/Resolução de Tarefas ] - Aluno responde tarefa
+    'formStudentEndingTask': BASE_URL + 'student/ending-task'
 
 }
 
@@ -73,9 +97,16 @@ urlFormActions = {
 /**
  * Configura URL's para requisições "implícitas" realizadas pelo próprio sistema
  *
- * @type {{getTasks: string, getTask: string, getStudents: string, getTeams: string}}
+ * @type {{
+ * getTasks: string, getTask: string, getStudents: string, getTeams: string,
+ * studentGetTeams: string, studentGetFinishedTasks: string, studentGetPendingTasks: string,
+ * studentGetDataTask: string
+ * }}
  */
 urlAjaxRequest = {
+
+
+    // ########## Requisições do painel de professores ###################################
 
     // Listar todas as tarefas atuais do professor
     'getTasks'      : BASE_URL + 'teacher/list-tasks',
@@ -89,6 +120,21 @@ urlAjaxRequest = {
 
     // Buscar todas as turmas definidas pelo professor
     'getTeams'      : BASE_URL + 'teacher/list-teams',
+
+
+    // ########### Requisições do painel de estudantes ####################################
+
+    // Buscar todas as turmas que este aluno participa atualmente
+    'studentGetTeams'           : BASE_URL + 'student/list-teams',
+
+    // Buscar todas as tarefas "encerradas" para este aluno
+    'studentGetFinishedTasks'   : BASE_URL + 'student/list-finished-tasks',
+
+    // Buscar todas as tarefas "pendentes" para este aluno
+    'studentGetPendingTasks'    : BASE_URL + 'student/list-pending-tasks',
+
+    // Buscar dados da tarefa encerrada para o Aluno
+    'studentGetTask'        : BASE_URL + 'student/task'
 
 }
 
@@ -130,7 +176,7 @@ $(document).ready(function () {
 // Define o número limite de questões que podem ser criadas em uma tarefa
 const NUM_LIMIT_QUESTIONS = 10;
 // Define o número limite de items que podem ser criadas em uma tarefa
-const NUM_LIMIT_ITEMS = 5;// todo - Se exceder 5, configure a letra abaixo
+const NUM_LIMIT_ITEMS = 5;// todo - Se exceder 5, configure a letra abaixo de forma correspondente
 // Letras para exibição correspondentes aos valores de itens
 var items = { 1 : 'A', 2 : 'B', 3 : 'C', 4 : 'D', 5 : 'E' };
 
@@ -237,7 +283,92 @@ function setValuesToDebug(defaultValue, keyValueTest) {
                 {
                     "id" : 2, "description" : "Turma de Matemática", "teacher" : 1, "quantity_students" : 45
                 },
-            ]
+            ],
+            // Buscar todas as turmas do Aluno
+            'testStudentGetTeams' : [
+                {
+                    "description" : "Turma de POO", "teacher" : "Carlos Silva"
+                },
+                {
+                    "description" : "Turma de Banco de Dados II", "teacher" : "Maria Teste"
+                },
+            ],
+            // Buscar todas as tarefas finalizadas para este Aluno
+            'testStudentGetPendingTasks' : [
+                {
+                    "id" : 4,
+                    "summary" : "<b>Tarefa de POO I</b> definida em: 14-10-2016 15:03 - Data prevista para encerramento: 15-10-2016 10:00",
+                },
+                {
+                    "id" : 6,
+                    "summary" : "<b>Tarefa de POO III</b> definida em: 17-10-2016 15:03 - Data prevista para encerramento: 25-10-2016 15:00",
+                },
+            ],
+            // Buscar todas as tarefas pendentes do Aluno
+            'testStudentGetFinishedTasks' : [
+                {
+                    "id" : 1,
+                    "summary" : "<b>Tarefa de Lógica Alg.</b> definida em: 17-10-2016 15:03 - encerrada em: 25-10-2016 15:00",
+                },
+                {
+                    "id" : 2,
+                    "summary" : "<b>Tarefa de POO I</b> definida em: 17-10-2016 15:03 - encerrada em: 25-10-2016 15:00",
+                }
+            ],
+            // Aluno busca dados da tarefa via ID desta.
+            'testStudentGetTask' : {
+                "questions" : [
+                    // Primeira questão de um questionario
+                    {
+                        "number" : 1,
+                        "points" : 2,
+                        "description" : "Este é o enunciado da quesão de número X do questionário blabla," +
+                        " marque a alternativa correta para os itens seguintes",
+                        "items" : [
+                            {
+                                "letter" : "A",
+                                "description" : "Item A é a resposta da questão X, este é o enunciado do item AAA",
+                                "response" : false
+                            },
+                            {
+                                "letter" : "B",
+                                "description" : "Item B é a resposta da questão X, este é o enunciado do item BBB",
+                                "response" : true
+                            },
+                            {
+                                "letter" : "C",
+                                "description" : "Item C é a resposta da questão X, este é o enunciado do item CCC",
+                                "response" : false
+                            },
+                        ]
+                    },
+                    // Segunda questão de um questionario
+                    {
+                        "number" : 2,
+                        "points" : 5,
+                        "description" : "Este é o enunciado da quesão de número X do questionário blabla," +
+                        " marque a alternativa correta para os itens seguintes",
+                        "items" : [
+                            {
+                                "letter" : "A",
+                                "description" : "Item A é a resposta da questão X, este é o enunciado do item AAA",
+                                "response" : false
+                            },
+                            {
+                                "letter" : "B",
+                                "description" : "Item B é a resposta da questão X, este é o enunciado do item BBB",
+                                "response" : false
+                            },
+                            {
+                                "letter" : "C",
+                                "description" : "Item C é a resposta da questão X, este é o enunciado do item CCC",
+                                "response" : true
+                            },
+                        ]
+                    }
+                ],
+                "references" : "Salve o poderoso Timão o Campeão dos Campeões. Segue link para o sucesso... http://timao.com.br"
+            }
         };
         console.log('Formato de dados necessário:');
         console.log(data[keyValueTest]);

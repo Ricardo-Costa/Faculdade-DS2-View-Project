@@ -80,7 +80,7 @@ $(document).ready(function () {
         waitingDialog.show('Aguarde...');
         var postData = $(this).serializeArray();
         $.ajax({
-            url: urlFormActions['userRegister'],
+            url: urlFormActions['formRegisterUser'],
             type: "POST",
             data: postData,
             dataType: "json",

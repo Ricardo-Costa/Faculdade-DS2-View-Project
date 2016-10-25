@@ -1,23 +1,25 @@
 /**
  * Created by Ricardo on 14/10/2016.
  */
-// formulário de envio de respostas no painel de alunos
-$(formId_endingTask).ajaxForm({
-    url: BASE_URL + 'student/endingTask',
+
+// formulário de envio de respostas de questionário realizado pelo alunos
+var formStudentEndingTask = '#form-student-ending-task';
+$(formStudentEndingTask).ajaxForm({
+    url: urlFormActions['formStudentEndingTask'],
     type: "POST",
     dataType: "json",
     success: function (e) {
         if (e['return'] != undefined) {
             if (e['return'] == true) {
-                $(formId_endingTask).resetForm();
+                $(formStudentEndingTask).resetForm();
             }
             bootbox.alert(e['message']);
         } else {
-            bootbox.alert(getMessage());
+            bootbox.alert(MSG_ALERT_ERROR);
         }
     },
     error: function () {
-        bootbox.alert(getMessage());
+        bootbox.alert(MSG_ALERT_ERROR);
     }
 });
-delete (formId_endingTask);
+delete (formStudentEndingTask);
