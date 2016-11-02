@@ -134,7 +134,20 @@ urlAjaxRequest = {
     'studentGetPendingTasks'    : BASE_URL + 'student/list-pending-tasks',
 
     // Buscar dados da tarefa encerrada para o Aluno
-    'studentGetTask'        : BASE_URL + 'student/task'
+    'studentGetTask'            : BASE_URL + 'student/task',
+
+
+    // ########### Requisições do painel de administradores ################################
+
+    // Buscar usuários do tipo estudante
+    'admGetStudents'        : BASE_URL + 'adm/list-students',
+
+    // Buscar usuários do tipo professor
+    'admGetTeachers'        : BASE_URL + 'adm/list-teachers',
+
+    // Buscar usuários do tipo administrador
+    'admGetAdministrators'  : BASE_URL + 'adm/list-administrators'
+
 
 }
 
@@ -149,6 +162,17 @@ urlAjaxRequest = {
 const
     USER_STUDENT = '2',
     USER_TEACHER = '3';
+
+/**
+ * Define o "estados" da conta do usuário no sistema.
+ *
+ * @type {number}
+ */
+const
+    STATUS_INACTIVE = 0,// ...quando o usuário cria a conta, mas nao pode acessar ainda [professores]
+    STATUS_ACTIVE   = 1,// ...quando o usuário está plenamente ativo na plataforma
+    STATUS_BANNED   = -1 ;// ...quando o usuário está proibido de acessar o sistema
+
 
 /**
  * Definição de mensagens de errors do sistema
@@ -368,7 +392,79 @@ function setValuesToDebug(defaultValue, keyValueTest) {
                     }
                 ],
                 "references" : "Salve o poderoso Timão o Campeão dos Campeões. Segue link para o sucesso... http://timao.com.br"
-            }
+            },
+
+            'testAdmGetStudents' : [
+                {
+                    'id' : 13211,
+                    'name' : 'Pedro ALuno Teste',
+                    'cpf' : '311.234.554-94',
+                    'email' : 'pedro.teste@mail.com',
+                    'status' : 1
+                },
+                {
+                    'id' : 2213,
+                    'name' : 'Maria Aluna Teste',
+                    'cpf' : '123.254.437-31',
+                    'email' : 'maria@mail.com',
+                    'status' : 1
+                },
+                {
+                    'id' : 4245,
+                    'name' : 'Carlos Aluno Teste',
+                    'cpf' : '323.234.434-54',
+                    'email' : 'carlos.aluno@mail.com',
+                    'status' : -1
+                },
+            ],
+
+            'testAdmGetTeachers' : [
+                {
+                    'id' : 11321,
+                    'name' : 'Caio Prof Teste',
+                    'cpf' : '311.234.554-94',
+                    'email' : 'caio.prof@mail.com',
+                    'status' : 1
+                },
+                {
+                    'id' : 2321,
+                    'name' : 'Renata Prof Teste',
+                    'cpf' : '123.254.437-31',
+                    'email' : 'renata@mail.com',
+                    'status' : 0
+                },
+                {
+                    'id' : 4215,
+                    'name' : 'Max prof Teste',
+                    'cpf' : '323.234.434-54',
+                    'email' : 'max@mail.com',
+                    'status' : -1
+                },
+            ],
+
+            'testAdmGetAdministrators' : [
+                {
+                    'id' : 1421,
+                    'name' : 'João Adm Teste',
+                    'cpf' : '311.234.524-94',
+                    'email' : 'joao.teste@mail.com',
+                    'status' : 1
+                },
+                {
+                    'id' : 231,
+                    'name' : 'Carla Adm Teste',
+                    'cpf' : '123.254.427-31',
+                    'email' : 'carla@mail.com',
+                    'status' : 1
+                },
+                {
+                    'id' : 42315,
+                    'name' : 'Bianca Adm Teste',
+                    'cpf' : '323.234.424-54',
+                    'email' : 'bianca.adm@mail.com',
+                    'status' : 0
+                },
+            ]
         };
         console.log('Formato de dados necessário:');
         console.log(data[keyValueTest]);

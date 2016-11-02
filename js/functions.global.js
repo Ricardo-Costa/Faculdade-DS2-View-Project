@@ -48,16 +48,21 @@ function getFunctionContext(functionName, parameters, formEnd) {
  * @param c - Classe do icone do botão
  * @param setFunction - Formar função que o botão deverá receber
  * @param disabled - ...se o botão vai estar desativado
+ * @param title
  * @returns {string}
  */
-function formButtonToTable(c, setFunction, disabled) {
+function formatButtonTBodyOptions(c, setFunction, disabled, title) {
+    // formatar titulo do componente
+    title = (disabled)? '...' : title ;
     if (disabled === true) {
         return '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-default disabled" disabled onclick="' + setFunction + '">' +
+            '<button type="button" class="btn btn-default disabled" disabled onclick="' + setFunction + '" ' +
+            ' data-toggle="tooltip" data-placement="top" title="'+ title +'" >' +
             '<i class="' + c + '"></i></button></div>';
     }
     return '<div class="btn-group" role="group">' +
-        '<button type="button" class="btn btn-default" onclick="' + setFunction + '">' +
+        '<button type="button" class="btn btn-default" onclick="' + setFunction + '" ' +
+        ' data-toggle="tooltip" data-placement="top" title="'+ title +'" >' +
         '<i class="' + c + '"></i></button></div>';
 }
 
