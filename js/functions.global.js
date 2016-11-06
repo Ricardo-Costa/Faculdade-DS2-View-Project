@@ -3,22 +3,6 @@
  */
 
 /**
- * Obter seguimentos de url corrente
- *
- * @param segmentNum - numero da sequencia
- * Exemplo:  http://localhost/<segment-1>/<segment-2>/<segment-3>
- *
- * @returns {*}
- */
-function getSegmentUrl(segmentNum) {
-    var pageUrl = window.location.href.split('/');
-    if (pageUrl[segmentNum + 2] != undefined) {
-        return pageUrl[segmentNum + 2];
-    }
-    return null;
-}
-
-/**
  * Retorna function de ação
  *
  * @param functionName
@@ -121,31 +105,6 @@ function checkEmail(_email, handleData) {
 }
 
 /**
- * Formar Ul & Li em div de paginação de tabelas
- *
- * @param divPgHtmlId
- * @param qtd
- * @param pgCurrent
- * @param titleFunction
- */
-function formatPaginationPanel(divPgHtmlId, qtd, pgCurrent, titleFunction) {
-    // Define quantidades de links que devem ser exibidos na paginação
-    var count = parseInt(mainArray.length / qtd) ;
-    var divPg = '<ul class="pagination">';
-    for (var i = 1; i <= count; i++) {
-        if (i == pgCurrent) {
-            divPg += '<li class="active"><a href="#" onclick="'+ titleFunction
-                +'('+ i +', '+ qtd +'); return false;">'+ i +'</a></li>';
-        } else {
-            divPg += '<li><a href="#" onclick="'+ titleFunction+'('+ i +', '+ qtd
-                +'); return false;">'+ i +'</a></li>';
-        }
-    }
-    divPg += '</ul>';
-    $(divPgHtmlId).html(divPg);
-}
-
-/**
  * Verificar se formulário possui inputs vazios.
  *
  * @param formIdHtml
@@ -164,89 +123,6 @@ function checkFormEmptyInputs(formIdHtml) {
 }
 
 /**
- * Formatar dados das listas de discussões.
- *
- * @param data
- * @returns {string}
- */
-function formatDataDiscussion(data) {
-    var dataHtml = '';
-    for (var i=0; data[i] != undefined; i++) {
-        dataHtml += '<tr><td><div class="forum-user-field">' +
-            '<a href="user-profile.html">' +
-            '<img class="forum-user-img" src="img/user-profile.svg" width="30" height="30" />' +
-            '<br/>' + data[i]['user']['name'] +'</a></div></td><td>' +
-            '<span class="label label-primary label-acronym">'+ data[i]['team'] +'</span>' +
-            '<a href="forum-discussion.html" target="_blank">'+ data[i]['title'] +'</a>' +
-            '</td><td><span class="label label-default pull-right"> '+ data[i]['date'] +' </span>' +
-            '<span class="label label-success pull-right"> '+ data[i]['replies'] +' resp. </span>' +
-            '<span class="label label-like pull-right">'+ data[i]['likes'] +'</span></td></tr>';
-    }
-    return dataHtml;
-}
-
-/**
- * Exibir debates "relacionados" no fórum
- */
-function showForumRelatedDiscussions() {
-    forumGetRelatedDiscussions(function (data) {
-        $('#forum-tbody-related-discussions').html(formatDataDiscussion(data));
-    });
-}
-
-/**
- * Exibir todos os debates no fórum
- */
-function showForumAllDiscussions() {
-    forumGetAllDiscussions(function (data) {
-        // ToDo - Modificar essa estrutura após testes...
-        var dataHtml = formatDataDiscussion(data);
-        $('#forum-tbody-all-discussions').html(
-            // ToDo - Modificar essa estrutura após testes...
-            dataHtml + dataHtml + dataHtml + dataHtml
-        );
-    });
-}
-
-/**
- * Buscar debates "Relacionados ao Usuário" no fórum
- *
- * @param handleData
- */
-function forumGetRelatedDiscussions(handleData) {
-    $.ajax({
-        url: urlAjaxRequest['forumGetRelatedDiscussions'],
-        type: "POST",
-        dataType: "json",
-        success: function (e) {
-            handleData(e);
-        },
-        error: function (e) {
-            handleData(setValuesToDebug(e, 'testForumGetRelatedDiscussions'));
-        }
-    });
-}
-
-/**
- * Buscar todos os debates do fórum
- *
- * @param handleData
- */
-function forumGetAllDiscussions(handleData) {
-    $.ajax({
-        url: urlAjaxRequest['forumGetAllDiscussions'],
-        type: "POST",
-        dataType: "json",
-        success: function (e) {
-            handleData(e);
-        },
-        error: function (e) {
-            handleData(setValuesToDebug(e, 'testForumGetRelatedDiscussions'));
-        }
-    });
-}
-
-/**
  * Estruturar script básico do componente "tooltip"
  *
  * @returns {string}
@@ -258,4 +134,5 @@ function getScriptTooTip() {
 
 $(document).ready(function (){
     $('[data-toggle="tooltip"]').tooltip();
+    $('#summernote').summernote();
 });

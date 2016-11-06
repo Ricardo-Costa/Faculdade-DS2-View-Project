@@ -13,6 +13,8 @@
     <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
     <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
     <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+    <link href="css/others/summernote.css" rel="stylesheet">
     <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
     <!-- Scripts -->
     <!--[if lt IE 9]>
@@ -36,8 +38,13 @@
     <script type="text/javascript" src="js/others/high-charts.js"></script>
     <script type="text/javascript" src="js/others/exporting.js"></script>
     <script type="text/javascript" src="js/others/bootstrap.table.filter.js"></script>
+    <script type="text/javascript" src="js/others/summernote.js"></script>
+
     <script type="text/javascript" src="js/config.js"></script>
     <script type="text/javascript" src="js/functions.global.js"></script>
+    <script type="text/javascript" src="js/functions.teachers.js"></script>
+    <script type="text/javascript" src="js/functions.students.js"></script>
+    <script type="text/javascript" src="js/functions.forum.js"></script>
 </head>
 <body>
 
@@ -76,11 +83,12 @@
     </nav>
 
 
+    <script type="text/javascript" src="js/forms/form-forum-create-discussion.js"></script>
     <script type="text/javascript">
         showForumRelatedDiscussions();
     </script>
 
-    <div id="cont_main" class="container"><!-- .container -->
+    <div class="container"><!-- .container -->
         <div class="row"> <!-- .row 1 -->
             <div class="well">
                 <ul id="forum-tab" class="nav nav-tabs" role="tablist">
@@ -213,29 +221,48 @@
                             </div>
                             <div class="panel-body">
 
-                                <form id="form-forum-create-discussion" class="form-horizontal" method="post" data-toggle="validator" role="form">
+                                <form id="form-forum-create-discussion" class="form-horizontal" method="post" data-toggle="validator" role="form" onsubmit="var editorContent = $('#editor-discussion-content').summernote('code');$('#forum-editor-discussion-content').val(editorContent); if(checkFormEmptyInputs('#' + $(this).attr('id')) || editorContent == '<p><br></p>'){return false;}">
                                     <div class="form-group">
-                                        <label for="target-task" class="control-label col-sm-4">Referenciar Tarefa</label>
+                                        <label for="target-team" class="control-label col-sm-3">Referenciar Turma</label>
                                         <div class="col-sm-4">
-                                            <select id="target-task" name="task" class="form-control" required>
-                                                <option>POO II</option>
-                                                <option>MAT I</option>
-                                            </select>
+                                            <select id="target-team" name="team" class="form-control" required="required"></select>
+
+                                            <!-- ToDo Obs.: Rodar este script se usuário logado é Aluno -->
+                                            <script type="text/javascript">
+                                                formatOptionsToStudents();
+                                            </script>
+
+                                            <!-- ToDo Obs.: Rodar este script se usuário logado é Professor -->
+                                            <script type="text/javascript">
+                                                //formatOptionsToTeachers();
+                                            </script>
+
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title" class="control-label col-sm-4">Título</label>
+                                        <label for="title" class="control-label col-sm-3">Título</label>
                                         <div class="col-sm-5">
-                                            <input id="title" class="form-control" name="title" maxlength="255" placeholder="Título" required />
+                                            <input id="title" class="form-control" name="title" maxlength="255" placeholder="Título" required="required" />
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="content" class="control-label col-sm-4">Conteúdo</label>
-                                        <div class="col-sm-6">
-                                            <textarea id="content" class="form-control" name="content" maxlength="400" required></textarea>
+                                        <label for="forum-editor-discussion-content" class="control-label col-sm-3">Conteúdo</label>
+                                        <div class="col-sm-7">
+                                            <div id="editor-discussion-content"></div>
+                                            <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $('#editor-discussion-content').summernote({
+                                                        height: 150,
+                                                        minHeight: null,
+                                                        maxHeight: null,
+                                                        focus: true
+                                                    });
+                                                });
+                                            </script>
                                             <div class="help-block with-errors"></div>
                                         </div>
+                                        <input type="hidden" id="forum-editor-discussion-content" name="content" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-7"></div>

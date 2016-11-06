@@ -444,3 +444,34 @@ span.label-like {
 span.label-like:after {
     content: " like";
 }
+/* painel de adição de comentário ao debate */
+div#discussion-add-comment {
+    display: block;
+    padding: 10px;
+    margin: 5px;
+}
+/* Comentarios */
+div.discussion-comments {
+    display: block;
+    padding: 25px;
+    margin-bottom: 0px;
+    border: none;
+    min-height: 95px;
+}
+div.comment {
+    padding: 5px;
+    background-color: #fbfbfb;
+    box-shadow: 2px 3px 4px #e6e6e6;
+    min-height: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+}
+span.label-comment {
+    background-color: #efefef;
+    box-shadow: 2px 1px 2px #e0e0e0;
+    color: #727272 !important;
+    font-weight: bold;
+    font-style: normal;
+    margin: auto 5px auto 5px;
+}

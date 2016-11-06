@@ -339,11 +339,7 @@ function formatTableStudents(data) {
                 break;
             }
         }
-        $('#tbody-list-students').html(dataHtml +
-            '<script type="text/javascript">$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})' +
-            '</script>');
-        // setar paginaçao desta tabela
-        formatPaginationPanel('#div-pagination-panel-tch-stds', qtd, 1, 'pgPnTchTbStds');
+        $('#tbody-list-students').html(dataHtml + getScriptTooTip());
     }
 }
 

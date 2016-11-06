@@ -92,7 +92,13 @@ urlFormActions = {
     'formStudentEndingTask': BASE_URL + 'student/ending-task',
 
     // [ Painel de Adm/Cadastro de Adm Users ] - Resgistrar novo Admin.
-    'formRegisterAdm': BASE_URL + 'administrator/register'
+    'formRegisterAdm': BASE_URL + 'administrator/register',
+
+    // [ Forum / Criação de Debates ] - Criar debate
+    'formForumCreateDiscussion': BASE_URL + 'forum/create-discussion',
+
+    // [ Forum / Debate ] - Adicionar comentario ao debate
+    'formForumAddComment': BASE_URL + 'forum/add-comment'
 
 }
 
@@ -196,10 +202,6 @@ const
  */
 const
     MSG_ALERT_ERROR = 'Erro ao tentar realizar processo.';
-
-
-/** Recebe valores de Arrays para formação de tabelas em Paineis de usuários. */
-var mainArray = [];
 
 
 $(document).ready(function () {

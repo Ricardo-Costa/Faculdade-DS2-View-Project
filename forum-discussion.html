@@ -1,10 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-Br">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Homework - Debate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <!-- Le styles -->
+    <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+    <!-- Scripts -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/js/others/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/others/jquery.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-validator.js"></script>
+    <script type="text/javascript" src="js/others/jquery.form.min.js"></script>
+    <script type="text/javascript" src="js/others/jquery.masked-input.js"></script>
+    <script type="text/javascript" src="js/others/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-date-time-picker.js"></script>
+    <script type="text/javascript" src="js/others/file-input.min.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-toggle.min.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="js/others/boot-box.min.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-waiting-for.js"></script>
+    <script type="text/javascript" src="js/others/high-charts.js"></script>
+    <script type="text/javascript" src="js/others/exporting.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap.table.filter.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
 </head>
 <body>
 
+
+    <nav id="custom-bootstrap-menu" class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html" class="navbar-brand font-system-name">Homework</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Painel</a></li>
+                    <li class="active"><a href="forum.html">Fórum</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Bianca Silva <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="user-profile.html">Perfil</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/user/logout">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <script type="text/javascript" src="js/forms/form-forum-add-comment.js"></script>
+
+
+    <div class="container"><!-- .container -->
+        <div class="row"> <!-- .row 1 -->
+            <div class="well">
+                <div class="tab-content">
+                    <div id="forum-discussions-related" role="tabpanel" class="tab-pane fade active in panel-div-tab" aria-labelledby="forum-discussions-related-tab">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">
+                                <button class="btn btn-default disabled btn-sm pull-right" disabled data-toggle="tooltip" data-placement="top" title="Excluir Debate">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                                <h4>Impáctos da utilização de Frameworks ORM.</h4>
+                                <p>
+                                    {{ Esta área deve receber o conteúdo princiapl do debate inserido pelo usuário.<br/>
+                                    Questionamentos, sugestões e assuntos relacionados a Turma. }}
+                                </p>
+                            </div>
+                            <div class="panel-body">
+
+                                <div id="discussion-add-comment">
+                                    <form id="form-discussion-add-comment" class="form-horizontal row" onsubmit="if($('#add-comment').val()==''){return false;}">
+                                        <div class="form-group col-md-3">
+                                            <button class="btn btn-primary btn-sm" onclick="$('#group-discussion-add-comment').toggle('slow')">
+                                                Comentar <span style="margin-left: 8px" class="glyphicon glyphicon-comment"></span>
+                                            </button>
+                                        </div>
+                                        <div id="group-discussion-add-comment" class="form-group col-md-6" style="display: none">
+                                            <div class="input-group">
+                                                <input id="add-comment" name="comment" type="text" class="form-control" placeholder="Comentar..." />
+                                                <span class="input-group-btn">
+                                                <button class="btn btn-default" type="submit">Enviar</button>
+                                            </span>
+                                            </div><!-- /input-group -->
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <ul class="panel-display-ul-li">
+
+                                    <!--  TODO - Recebe comentario 1... -->
+                                    <li class="title-li-tasks">
+
+                                        <div class="discussion-comments">
+                                            <div class="forum-user-field col-md-1">
+                                                <a href="user-profile.html">
+                                                    <img class="forum-user-img" src="img/user-profile.svg" width="30" height="30" /><br/>
+                                                    Silvio Teste
+                                                </a>
+                                            </div>
+                                            <div class="col-md-8 comment">
+                                                <span class="label label-comment pull-right">06/12/2016 12:15</span>
+                                                <span>
+                                                {{ Este é um comentario referente ao debate desta postagem.
+                                                    Este é um comentario referente ao debate desta postagem.
+                                                    Este é um comentario referente ao debate desta postagem.
+                                                    Este é um comentario referente ao debate desta postagem.
+                                                    Este é um comentario referente ao debate desta postagem }}
+                                                </span>
+                                            </div>
+
+                                            <div class="col-md-2">
+
+                                                <button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Like">
+                                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                </button>
+
+                                                <button class="btn btn-default disabled btn-sm" disabled data-toggle="tooltip" data-placement="top" title="Excluir">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </li>
+
+                                    <!--  TODO - Recebe comentario 2... -->
+                                    <li class="title-li-tasks">
+
+                                        <div class="discussion-comments">
+                                            <div class="forum-user-field col-md-1">
+                                                <a href="user-profile.html">
+                                                    <img class="forum-user-img" src="img/user-profile.svg" width="30" height="30" /><br/>
+                                                    Silvio Teste
+                                                </a>
+                                            </div>
+                                            <div class="col-md-8 comment">
+                                                <span class="label label-comment pull-right">06/12/2016 11:07</span>
+                                                <span>
+                                                {{ Este é um segundo comentario referente ao debate desta postagem
+                                                    www.homework.com || www.homework.com.br ?? | © Homework 2016 }}
+                                                </span>
+                                            </div>
+
+                                            <div class="col-md-2">
+
+                                                <button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Like">
+                                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                </button>
+
+                                                <button class="btn btn-default disabled btn-sm" disabled data-toggle="tooltip" data-placement="top" title="Excluir">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </li>
+
+                                    <!--  TODO - Recebe comentario 2... -->
+                                    <li class="title-li-tasks">
+
+                                        <div class="discussion-comments">
+                                            <div class="forum-user-field col-md-1">
+                                                <a href="user-profile.html">
+                                                    <img class="forum-user-img" src="img/user-profile.svg" width="30" height="30" /><br/>
+                                                    Silvio Teste
+                                                </a>
+                                            </div>
+                                            <div class="col-md-8 comment">
+                                                <span class="label label-comment pull-right">06/12/2016 11:07</span>
+                                                <span>
+                                                    {{ Este é o terceiro comentario referente ao debate desta postagem.
+                                                    Albert Einstein - A mente que se abre a uma nova ideia jamais voltará
+                                                    ao seu tamanho original. }}
+                                                </span>
+                                            </div>
+
+                                            <div class="col-md-2">
+
+                                                <button class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Like">
+                                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                                </button>
+
+                                                <button class="btn btn-default disabled btn-sm" disabled data-toggle="tooltip" data-placement="top" title="Excluir">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </li>
+
+                                </ul>
+
+                                <script type="text/javascript">
+                                    $('[data-toggle="tooltip"]').tooltip()
+                                </script>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <span>&#169; Homework 2016</span>
+    </footer>
 </body>
 </html>

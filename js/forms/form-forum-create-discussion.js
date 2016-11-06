@@ -1,19 +1,18 @@
 /**
- * Created by Ricardo on 14/10/2016.
+ * Created by Ricardo on 06/11/2016.
  */
-
 $(document).ready(function () {
 
-    // formulário de envio de respostas de questionário realizado pelo alunos
-    var formStudentEndingTask = '#form-student-ending-task';
-    $(formStudentEndingTask).ajaxForm({
-        url: urlFormActions['formStudentEndingTask'],
+    // formulário para criação de novos debates
+    var formForumCreateDisc = '#form-forum-create-discussion';
+    $(formForumCreateDisc).ajaxForm({
+        url: urlFormActions['formForumCreateDiscussion'],
         type: "POST",
         dataType: "json",
         success: function (e) {
             if (e['return'] != undefined) {
-                if (e['return'] == true) {
-                    $(formStudentEndingTask).resetForm();
+                if (e['return'] === "true") {
+                    $(formForumCreateDisc).resetForm();
                 }
                 bootbox.alert(e['message']);
             } else {
@@ -24,6 +23,6 @@ $(document).ready(function () {
             bootbox.alert(MSG_ALERT_ERROR);
         }
     });
-    delete (formStudentEndingTask);
+    delete (formForumCreateDisc);
 
 });
