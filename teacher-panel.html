@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Homework - Panel</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
         <!-- Le styles -->
-        <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/global.css" media="screen" rel="stylesheet" type="text/css" />
         <!-- Scripts -->
         <!--[if lt IE 9]>
         <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
@@ -61,6 +61,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="http://localhost/teacher/panel">Painel</a></li>
+                        <li><a href="forum.html">Fórum</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -184,7 +185,7 @@
                                         <div class="form-group">
                                             <label for="panel-create-task-select-team" class="control-label col-sm-3">Turma</label>
                                             <div class="col-sm-4">
-                                                <select id="panel-create-task-select-team" name="team" required class="form-control"></select>
+                                                <select id="panel-create-task-select-team" name="team" required="required" class="form-control"></select>
                                                 <small>
                                                     <b>Turma</b>: Especifique para qual turma este questionário deve ser aplicado.
                                                 </small>
@@ -260,7 +261,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-3"></div>
                                             <div class="input-group col-sm-7">
-                                                <input type="text" data-tb-target="table-list-students" class="form-control input-system-search" placeholder="Procurar aluno" required>
+                                                <input type="text" data-tb-target="table-list-students" class="form-control input-system-search" placeholder="Procurar aluno" required="required" />
                                     <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" name="fetch" value="by_name"><i
                                             class="glyphicon glyphicon-search"></i></button>
@@ -313,7 +314,7 @@
                                         <div class="form-group">
                                             <div class="col-sm-3"></div>
                                             <div class="input-group col-sm-7">
-                                                <input type="text" data-tb-target="tb-panel-teacher-studentsall" class="form-control input-system-search" placeholder="Procurar aluno" required>
+                                                <input type="text" data-tb-target="tb-panel-teacher-studentsall" class="form-control input-system-search" placeholder="Procurar aluno" required="required" />
                                     <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" name="fetch" value="by_name"><i
                                             class="glyphicon glyphicon-search"></i></button>
@@ -354,10 +355,10 @@
                                         <div class="form-group">
                                             <label for="team-description" class="control-label col-sm-3">Descrição</label>
                                             <div class="col-sm-4">
-                                                <input id="team-description" name="team_description" type="text" class="form-control" placeholder="Descrição da Turma" required>
+                                                <input id="team-description" name="description" type="text" class="form-control" placeholder="Descrição da Turma" required="required" />
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="submit" class="form-control btn-primary" value="Definir">
+                                                <input type="submit" class="form-control btn-primary" value="Definir" />
                                             </div>
                                         </div>
                                     </form>

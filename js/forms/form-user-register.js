@@ -20,7 +20,7 @@ $(document).ready(function () {
     }).blur(function () {
         checkPhone($(this).val(), function (data) {
             if (data['return'] != undefined) {
-                if (data['return'] == true) {
+                if (data['return'] === "true") {
                     // informar "help-block"
                     $('#span-info-phone').html(' ');
                     $('#form-group-phone').removeClass('has-error');
@@ -40,7 +40,7 @@ $(document).ready(function () {
     }).blur(function () {
         checkEmail($(this).val(), function (data) {
             if (data['return'] != undefined) {
-                if (data['return'] == true) {
+                if (data['return'] === "true") {
                     // informa
                     $('#div-info-email').html(' ');
                     $('#form-group-email').removeClass('has-error');
@@ -60,7 +60,7 @@ $(document).ready(function () {
     }).blur(function () {
         checkCPF($(this).val(), function (data) {
             if (data['return'] != undefined) {
-                if (data['return'] == true) {
+                if (data['return'] === "true") {
                     // informa
                     $('#span-info-cpf').html(' ');
                     $('#form-user-register-div-cpf').removeClass('has-error');
@@ -77,33 +77,36 @@ $(document).ready(function () {
     // formulário para registro de usuários
     var formRegisterUser = '#form-register-user';
     $(formRegisterUser).submit(function (e) {
-        waitingDialog.show('Aguarde...');
-        var postData = $(this).serializeArray();
-        $.ajax({
-            url: urlFormActions['formRegisterUser'],
-            type: "POST",
-            data: postData,
-            dataType: "json",
-            success: function (e) {
-                waitingDialog.hide();
-                if (e['return'] != undefined) {
-                    if (e['return'] == true) {
-                        $(formRegisterUser).resetForm();
-                        bootbox.alert(e['message'], function () {
-                            window.location.assign(BASE_URL);
-                        })
+        // verificar preechimento de inputs
+        if (!checkFormEmptyInputs(formRegisterUser)) {
+            waitingDialog.show('Aguarde...');
+            var postData = $(this).serializeArray();
+            $.ajax({
+                url: urlFormActions['formRegisterUser'],
+                type: "POST",
+                data: postData,
+                dataType: "json",
+                success: function (e) {
+                    waitingDialog.hide();
+                    if (e['return'] != undefined) {
+                        if (e['return'] === "true") {
+                            $(formRegisterUser).resetForm();
+                            bootbox.alert(e['message'], function () {
+                                window.location.assign(BASE_URL);
+                            })
+                        } else {
+                            bootbox.alert(e['message']);
+                        }
                     } else {
-                        bootbox.alert(e['message']);
+                        bootbox.alert(MSG_ALERT_ERROR);
                     }
-                } else {
+                },
+                error: function () {
+                    waitingDialog.hide();
                     bootbox.alert(MSG_ALERT_ERROR);
                 }
-            },
-            error: function () {
-                waitingDialog.hide();
-                bootbox.alert(MSG_ALERT_ERROR);
-            }
-        });
+            });
+        }
         e.preventDefault();
     });
     delete (formRegisterUser);

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="utf-8">
+    <title>Homework - Fórum</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <!-- Le styles -->
+    <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+    <!-- Scripts -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/js/others/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/others/jquery.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-validator.js"></script>
+    <script type="text/javascript" src="js/others/jquery.form.min.js"></script>
+    <script type="text/javascript" src="js/others/jquery.masked-input.js"></script>
+    <script type="text/javascript" src="js/others/moment-with-locales.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-date-time-picker.js"></script>
+    <script type="text/javascript" src="js/others/file-input.min.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-toggle.min.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="js/others/boot-box.min.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap-waiting-for.js"></script>
+    <script type="text/javascript" src="js/others/high-charts.js"></script>
+    <script type="text/javascript" src="js/others/exporting.js"></script>
+    <script type="text/javascript" src="js/others/bootstrap.table.filter.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/functions.global.js"></script>
+</head>
+<body>
+
+
+    <nav id="custom-bootstrap-menu" class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html" class="navbar-brand font-system-name">Homework</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Painel</a></li>
+                    <li class="active"><a href="forum.html">Fórum</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Bianca Silva <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="user-profile.html">Perfil</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="http://localhost/user/logout">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+
+    <script type="text/javascript">
+        showForumRelatedDiscussions();
+    </script>
+
+    <div id="cont_main" class="container"><!-- .container -->
+        <div class="row"> <!-- .row 1 -->
+            <div class="well">
+                <ul id="forum-tab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="dropdown active">
+                        <a aria-expanded="false" href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents">Debates <span class="caret"></span></a>
+                        <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents">
+                            <li class="active">
+                                <a id="forum-discussions-related-tab" onclick="showForumRelatedDiscussions()" href="#forum-discussions-related" role="tab" data-toggle="tab" aria-controls="forum-discussions-related" aria-expanded="true">Relacionados</a>
+                            </li>
+                            <li>
+                                <a id="forum-discussions-all-tab" onclick="showForumAllDiscussions()" href="#forum-discussions-all" role="tab" data-toggle="tab" aria-controls="forum-discussions-all" aria-expanded="true">Todos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li role="presentation">
+                        <a id="forum-create-discussions-tab" onclick="" href="#forum-create-discussions" role="tab" data-toggle="tab" aria-controls="forum-create-discussions" aria-expanded="true">Novo Debate</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="forum-discussions-related" role="tabpanel" class="tab-pane fade active in panel-div-tab" aria-labelledby="forum-discussions-related-tab">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">
+                                <h4>Debates Relacionados</h4>
+                                <p>
+                                    Estes são debates vinculados a turmas que você participa e tarefas
+                                    referentes as mesmas.
+                                </p>
+                            </div>
+                            <div class="panel-body">
+
+                                <!-- Table -->
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-1">Usuário</th>
+                                        <th class="col-md-8"></th>
+                                        <th class="col-md-3"><span class="pull-right">Detalhes</span></th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="forum-tbody-related-discussions"></tbody>
+
+                                </table>
+
+                                <hr/>
+
+                                <nav class="text-center" aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm">
+                                        <li>
+                                            <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="forum-discussions-all" role="tabpanel" class="tab-pane fade in panel-div-tab" aria-labelledby="forum-discussions-all-tab">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">
+                                <h4>Alunos</h4>
+                                <p>
+                                    Usuários cadastrados no sistema com o perfil de estudante.
+                                </p>
+                            </div>
+                            <div class="panel-body">
+
+                                <!-- Table -->
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th class="col-md-1">Usuário</th>
+                                        <th class="col-md-8"></th>
+                                        <th class="col-md-3"><span class="pull-right">Detalhes</span></th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="forum-tbody-all-discussions"></tbody>
+
+                                </table>
+
+                                <hr/>
+
+                                <nav class="text-center" aria-label="Page navigation">
+                                    <ul class="pagination pagination-sm">
+                                        <li>
+                                            <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="forum-create-discussions" role="tabpanel" class="tab-pane fade in panel-div-tab" aria-labelledby="forum-create-discussions-tab">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->
+                            <div class="panel-heading">
+                                <h4>Novo Debate</h4>
+                                <p>
+                                    Realizar cadastro de novos usuários com perfil de administrador da aplicação.
+                                </p>
+                            </div>
+                            <div class="panel-body">
+
+                                <form id="form-forum-create-discussion" class="form-horizontal" method="post" data-toggle="validator" role="form">
+                                    <div class="form-group">
+                                        <label for="target-task" class="control-label col-sm-4">Referenciar Tarefa</label>
+                                        <div class="col-sm-4">
+                                            <select id="target-task" name="task" class="form-control" required>
+                                                <option>POO II</option>
+                                                <option>MAT I</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="control-label col-sm-4">Título</label>
+                                        <div class="col-sm-5">
+                                            <input id="title" class="form-control" name="title" maxlength="255" placeholder="Título" required />
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content" class="control-label col-sm-4">Conteúdo</label>
+                                        <div class="col-sm-6">
+                                            <textarea id="content" class="form-control" name="content" maxlength="400" required></textarea>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-7"></div>
+                                        <div class="col-sm-3">
+                                            <input type="submit" class="form-control btn btn-primary" value="Criar"/>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <span>&#169; Homework 2016</span>
+    </footer>
+</body>
+</html>

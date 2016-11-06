@@ -104,7 +104,7 @@ small#phrase {
 }
 .panel-forms input.btn-forms-lc:hover,
 .panel-forms input.btn-forms-lc:active,
-.panel-forms input.btn-forms-lc:focus,
+.panel-forms input.btn-forms-lc:focus
 {
     background-color: #4c2f6f;
     color: #e3e3e3;
@@ -364,4 +364,83 @@ form#user-img-upload {
 }
 input#image-file {
     padding: 5px;
+}
+
+/* Padronizar componentes "Ativos" */
+.dropdown-menu > .active > a {
+    background-color: #7146a6;
+}
+.dropdown-menu > .active > a:hover {
+    background-color: #663f95;
+}
+.btn-primary {
+    background-color: #7146a6;
+    border-color: #684098;
+}
+.btn-primary:hover {
+    background-color: #684098;
+    border-color: #684098;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary:target {
+    background-color: #684098;
+    border-color: #684098;
+}
+.btn-primary[disabled], .btn-primary[disabled]:hover,
+.btn-primary[disabled]:disabled,
+.btn-primary:disabled,
+.btn-primary:disabled:hover,
+.btn-primary.disabled,
+.btn-primary.disabled:hover,
+.btn-primary.disabled:focus,
+input[type=submit].btn-primary:hover,
+input[type=submit].btn-primary,
+input[type=submit]:disabled ,
+input[type=submit] .disabled
+{
+    background-color: #8e6fc5;
+    border-color: #8e6fc5;
+}
+
+/* Componentes do fórum */
+div.forum-user-field {
+    border: 1px solid #dedede;
+    background-color: #f4f4f4;
+    padding: 3px;
+    margin: 0px;
+    border-radius: 3px;
+    /* width: 115px; */
+    text-align: center;
+}
+div.forum-user-field img.forum-user-img {
+    margin-top: -15px;
+    border: 2px solid #d7d7d7;
+    background-color: #ececec;
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+div.forum-user-field a {
+    font-size: 11px;
+    font-style: italic;
+    color: #565656;
+    border-top: 1px dashed #cecece;
+    display: block;
+}
+/* Siggla de Turmas */
+span.label-acronym {
+    margin-right: 10px
+}
+span.label-primary {
+    background-color: #655098;
+}
+span.label-like {
+    background-color: #efefef;
+    box-shadow: 2px 1px 2px #e0e0e0;
+    color: #3c3c3c !important;
+    font-weight: bold;
+    margin: auto 5px auto 5px;
+}
+span.label-like:after {
+    content: " like";
 }

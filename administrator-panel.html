@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>Homework - Panel</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
     <!-- Le styles -->
-    <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="css/global.css" media="screen" rel="stylesheet" type="text/css"/>
     <!-- Scripts -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
@@ -60,6 +60,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="http://localhost/administrator/panel">Painel</a></li>
+                    <li><a href="forum.html">Fórum</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -166,7 +167,7 @@
                                         <div class="col-sm-3"></div>
                                         <div class="input-group col-sm-7">
                                             <!-- <input type="hidden" name="action" value="discipline_consult"/> -->
-                                            <input name="q" data-tb-target="tb-panel-adm-users-students" type="search" class="form-control input-system-search" placeholder="Buscar..." required />
+                                            <input name="q" data-tb-target="tb-panel-adm-users-students" type="search" class="form-control input-system-search" placeholder="Buscar..." required="required" />
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button" name="fetch" value="by_name">
                                                     <i class="glyphicon glyphicon-search"></i>
@@ -207,7 +208,7 @@
                                         <div class="col-sm-3"></div>
                                         <div class="input-group col-sm-7">
                                             <!-- <input type="hidden" name="action" value="discipline_consult"/> -->
-                                            <input name="q" data-tb-target="tb-panel-adm-users-administrators" type="search" class="form-control input-system-search" placeholder="Buscar..." required />
+                                            <input name="q" data-tb-target="tb-panel-adm-users-administrators" type="search" class="form-control input-system-search" placeholder="Buscar..." required="required" />
                                             <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button" name="fetch" value="by_name">
                                                     <i class="glyphicon glyphicon-search"></i>
@@ -243,8 +244,47 @@
                                 </p>
                             </div>
                             <div class="panel-body">
-                                {{ Criar formulário aqui.... }}
-                                {{ Obs : Gerar senha auto... }}
+
+                                <script type="text/javascript" src="js/forms/form-user-register.js"></script>
+                                <script type="text/javascript" src="js/forms/form-adm-register.js"></script>
+
+                                <form id="form-adm-register" class="form-horizontal" method="post" data-toggle="validator" role="form">
+                                    <div id="form-group-cpf" class="form-group field-teacher-register">
+                                        <label for="cpf" class="control-label col-sm-4">CPF</label>
+                                        <div class="col-sm-6">
+                                            <input id="cpf" class="form-control cpf" name="cpf" type="text" placeholder="Digite seu CPF" required="required"/>
+                                            <span id="span-info-cpf" class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name" class="control-label col-sm-4">Nome</label>
+                                        <div class="col-sm-6">
+                                            <input id="name" type="text" class="form-control" name="name" data-minlength="3" data-error="Mínimo 3 e máximo 20 caracteres" maxlength="20" placeholder="Nome" required="required" pattern="[0-9A-Za-zÀ-ú, -,Ã,ã,Õ,õ,ç,Ç]{3,20}" title="Atenção: Mínimo 3 e máximo 20 caracteres alfanuméricos." />
+                                            <span class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div id="form-group-phone" class="form-group field-teacher-register">
+                                        <label for="phone" class="control-label col-sm-4">Telefone</label>
+                                        <div class="col-sm-6">
+                                            <input id="phone" type="text" class="form-control cels" name="phone" required="required" placeholder="Número de Telefone"/>
+                                            <span id="span-info-phone" class="help-block with-errors"></span>
+                                        </div>
+                                    </div>
+                                    <div id="form-group-email" class="form-group">
+                                        <label for="email" class="control-label col-sm-4">E-mail</label>
+                                        <div class="col-sm-6">
+                                            <input id="email" type="email" maxlength="50" name="email" class="form-control" placeholder="Email" data-error="Este endereço de email é inválido." required="required" />
+                                            <div id="div-info-email" class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-7"></div>
+                                        <div class="col-sm-3">
+                                            <input type="submit" class="form-control btn btn-primary" value="Cadastrar"/>
+                                        </div>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>

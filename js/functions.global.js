@@ -45,25 +45,25 @@ function getFunctionContext(functionName, parameters, formEnd) {
 /**
  * Formar botão de açães do sistema
  *
- * @param c - Classe do icone do botão
+ * @param classGlyphicon - Classe glyphicon para icone do botão
  * @param setFunction - Formar função que o botão deverá receber
  * @param disabled - ...se o botão vai estar desativado
  * @param title
  * @returns {string}
  */
-function formatButtonTBodyOptions(c, setFunction, disabled, title) {
+function formatButtonTBodyOptions(classGlyphicon, setFunction, disabled, title) {
     // formatar titulo do componente
     title = (disabled)? '...' : title ;
     if (disabled === true) {
         return '<div class="btn-group" role="group">' +
-            '<button type="button" class="btn btn-default disabled" disabled onclick="' + setFunction + '" ' +
+            '<button type="button" class="btn btn-default disabled btn-sm" disabled onclick="' + setFunction + '" ' +
             ' data-toggle="tooltip" data-placement="top" title="'+ title +'" >' +
-            '<i class="' + c + '"></i></button></div>';
+            '<i class="' + classGlyphicon + '"></i></button></div>';
     }
     return '<div class="btn-group" role="group">' +
-        '<button type="button" class="btn btn-default" onclick="' + setFunction + '" ' +
+        '<button type="button" class="btn btn-default btn-sm" onclick="' + setFunction + '" ' +
         ' data-toggle="tooltip" data-placement="top" title="'+ title +'" >' +
-        '<i class="' + c + '"></i></button></div>';
+        '<i class="' + classGlyphicon + '"></i></button></div>';
 }
 
 /**
@@ -143,6 +143,117 @@ function formatPaginationPanel(divPgHtmlId, qtd, pgCurrent, titleFunction) {
     }
     divPg += '</ul>';
     $(divPgHtmlId).html(divPg);
+}
+
+/**
+ * Verificar se formulário possui inputs vazios.
+ *
+ * @param formIdHtml
+ *
+ * @returns {boolean}
+ */
+function checkFormEmptyInputs(formIdHtml) {
+    var inputsArray = $(formIdHtml).serializeArray(), input;
+    for (var i=0; i < inputsArray.length; i++) {
+        input = inputsArray[i];
+        if (input.value == '' || input.value == null) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Formatar dados das listas de discussões.
+ *
+ * @param data
+ * @returns {string}
+ */
+function formatDataDiscussion(data) {
+    var dataHtml = '';
+    for (var i=0; data[i] != undefined; i++) {
+        dataHtml += '<tr><td><div class="forum-user-field">' +
+            '<a href="user-profile.html">' +
+            '<img class="forum-user-img" src="img/user-profile.svg" width="30" height="30" />' +
+            '<br/>' + data[i]['user']['name'] +'</a></div></td><td>' +
+            '<span class="label label-primary label-acronym">'+ data[i]['team'] +'</span>' +
+            '<a href="forum-discussion.html" target="_blank">'+ data[i]['title'] +'</a>' +
+            '</td><td><span class="label label-default pull-right"> '+ data[i]['date'] +' </span>' +
+            '<span class="label label-success pull-right"> '+ data[i]['replies'] +' resp. </span>' +
+            '<span class="label label-like pull-right">'+ data[i]['likes'] +'</span></td></tr>';
+    }
+    return dataHtml;
+}
+
+/**
+ * Exibir debates "relacionados" no fórum
+ */
+function showForumRelatedDiscussions() {
+    forumGetRelatedDiscussions(function (data) {
+        $('#forum-tbody-related-discussions').html(formatDataDiscussion(data));
+    });
+}
+
+/**
+ * Exibir todos os debates no fórum
+ */
+function showForumAllDiscussions() {
+    forumGetAllDiscussions(function (data) {
+        // ToDo - Modificar essa estrutura após testes...
+        var dataHtml = formatDataDiscussion(data);
+        $('#forum-tbody-all-discussions').html(
+            // ToDo - Modificar essa estrutura após testes...
+            dataHtml + dataHtml + dataHtml + dataHtml
+        );
+    });
+}
+
+/**
+ * Buscar debates "Relacionados ao Usuário" no fórum
+ *
+ * @param handleData
+ */
+function forumGetRelatedDiscussions(handleData) {
+    $.ajax({
+        url: urlAjaxRequest['forumGetRelatedDiscussions'],
+        type: "POST",
+        dataType: "json",
+        success: function (e) {
+            handleData(e);
+        },
+        error: function (e) {
+            handleData(setValuesToDebug(e, 'testForumGetRelatedDiscussions'));
+        }
+    });
+}
+
+/**
+ * Buscar todos os debates do fórum
+ *
+ * @param handleData
+ */
+function forumGetAllDiscussions(handleData) {
+    $.ajax({
+        url: urlAjaxRequest['forumGetAllDiscussions'],
+        type: "POST",
+        dataType: "json",
+        success: function (e) {
+            handleData(e);
+        },
+        error: function (e) {
+            handleData(setValuesToDebug(e, 'testForumGetRelatedDiscussions'));
+        }
+    });
+}
+
+/**
+ * Estruturar script básico do componente "tooltip"
+ *
+ * @returns {string}
+ */
+function getScriptTooTip() {
+    return '<script type="text/javascript">' +
+        '$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})</script>';
 }
 
 $(document).ready(function (){

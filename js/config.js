@@ -89,7 +89,10 @@ urlFormActions = {
     'formUpdateTask': BASE_URL + 'teacher/create-task',
 
     // [ Painel de Conclusão/Resolução de Tarefas ] - Aluno responde tarefa
-    'formStudentEndingTask': BASE_URL + 'student/ending-task'
+    'formStudentEndingTask': BASE_URL + 'student/ending-task',
+
+    // [ Painel de Adm/Cadastro de Adm Users ] - Resgistrar novo Admin.
+    'formRegisterAdm': BASE_URL + 'administrator/register'
 
 }
 
@@ -146,7 +149,19 @@ urlAjaxRequest = {
     'admGetTeachers'        : BASE_URL + 'adm/list-teachers',
 
     // Buscar usuários do tipo administrador
-    'admGetAdministrators'  : BASE_URL + 'adm/list-administrators'
+    'admGetAdministrators'  : BASE_URL + 'adm/list-administrators',
+
+
+    // ########### Requisições do Fórum  ####################################################
+
+    // Buscar debates relacionados ao Aluno ou Professor logado atualmente
+    // Obs.: Se este usuário é um ADM, este deve receber como resposta dessa requisição,
+    // ...TODOS os debates correntes
+    'forumGetRelatedDiscussions' : BASE_URL + 'forum/list-related-discussions',
+
+    // Buscar todos os debates atuais do sistema
+    // Obs.: LIMIT deve ser utilizado, pois esta página utiliza paginação
+    'forumGetAllDiscussions'     : BASE_URL + 'forum/list-all-discussions'
 
 
 }
@@ -311,10 +326,10 @@ function setValuesToDebug(defaultValue, keyValueTest) {
             // Buscar todas as turmas do Aluno
             'testStudentGetTeams' : [
                 {
-                    "description" : "Turma de POO", "teacher" : "Carlos Silva"
+                    "id" : 723, "description" : "Turma de POO", "teacher" : "Carlos Silva"
                 },
                 {
-                    "description" : "Turma de Banco de Dados II", "teacher" : "Maria Teste"
+                    "id" : 45, "description" : "Turma de Banco de Dados II", "teacher" : "Maria Teste"
                 },
             ],
             // Buscar todas as tarefas finalizadas para este Aluno
@@ -464,10 +479,61 @@ function setValuesToDebug(defaultValue, keyValueTest) {
                     'email' : 'bianca.adm@mail.com',
                     'status' : 0
                 },
+            ],
+
+            'testForumGetRelatedDiscussions' : [
+                {
+                    'id' : 1421,
+                    'team' : 'POO III',
+                    'title' : 'A relação entre a Class Thread e a Runnable.',
+                    'likes' : 23,
+                    'replies' : 12,
+                    'date' : '07/08/2016',
+                    'user' : {
+                        'id' : 124,
+                        'name' : 'Carlos Jr.'
+                    }
+                },
+                {
+                    'id' : 1421,
+                    'team' : 'DB II',
+                    'title' : 'Impáctos da utilização de Frameworks ORM.',
+                    'likes' : 45,
+                    'replies' : 15,
+                    'date' : '17/07/2016',
+                    'user' : {
+                        'id' : 124,
+                        'name' : 'Marcos Silva'
+                    }
+                },
+                {
+                    'id' : 1421,
+                    'team' : 'Eng Sof I',
+                    'title' : 'Qual a melhor ferramenta para gerenciamento de projetos?',
+                    'likes' : 32,
+                    'replies' : 6,
+                    'date' : '22/06/2016',
+                    'user' : {
+                        'id' : 124,
+                        'name' : 'Ana M.'
+                    }
+                },
+                {
+                    'id' : 1421,
+                    'team' : 'ADS I',
+                    'title' : 'A questão 1 desta tarefa não deveria ser anulada?',
+                    'likes' : 4,
+                    'replies' : 3,
+                    'date' : '14/04/2016',
+                    'user' : {
+                        'id' : 124,
+                        'name' : 'Pedro A.'
+                    }
+                }
             ]
         };
-        console.log('Formato de dados necessário:');
-        console.log(data[keyValueTest]);
+        //console.log('Formato de dados necessário:');
+        //console.log(data[keyValueTest]);
         return data[keyValueTest];
     }
     return defaultValue;

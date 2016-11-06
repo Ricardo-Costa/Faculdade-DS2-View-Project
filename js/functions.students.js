@@ -12,12 +12,22 @@ function studentListTeams() {
             for (var i = 0; (data[i] != undefined); i++) {
                 dataHtml += '<tr><td>' + data[i]['description'] + '</td>' +
                     '<td>' + data[i]['teacher'] + '</td>' +
-                    '<td><b>Recebe buttons de opções...</b></td></tr>';
+                    '<td>' + formatButtonTBodyOptions('glyphicon glyphicon-minus', 'unbindTeam('+ data[i]['id'] +')', false, 'Desvincular-se') + '</td></tr>';
             }
-            $('#tbody_MyTeams').html(dataHtml);
+            $('#tbody_MyTeams').html(dataHtml + getScriptTooTip());
             delete (dataHtml);
         }
     });
+}
+
+/**
+ * Desvincular-se da Turma em questão.
+ *
+ * @param teamId
+ */
+function unbindTeam(teamId) {
+    // todo implementar aqui
+    alert('Desvincular-se a Turma ID { '+ teamId +' }');
 }
 
 /**
@@ -59,9 +69,7 @@ function studentListFinishedTasks() {
         } else {
             dataHtml = "<br/><p class='text-center'> Nenhuma tarefa aplicada atualmente... </p>";
         }
-        $('#student-div-finished-tasks').html(dataHtml  +
-            '<script type="text/javascript">$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})' +
-            '</script>');
+        $('#student-div-finished-tasks').html(dataHtml + getScriptTooTip());
         delete (dataHtml);
     });
 }
@@ -107,9 +115,7 @@ function studentListPendingTasks() {
         } else {
             dataHtml = "<br/><p class='text-center'> Nenhuma tarefa aplicada atualmente... </p>";
         }
-        $('#student-div-pendants-tasks').html(dataHtml  +
-            '<script type="text/javascript">$(function () {$(\'[data-toggle="tooltip"]\').tooltip()})' +
-            '</script>');
+        $('#student-div-pendants-tasks').html(dataHtml + getScriptTooTip());
         delete (dataHtml);
     });
 }

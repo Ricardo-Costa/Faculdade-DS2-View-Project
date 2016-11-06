@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-Br">
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Homework - Panel</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link href="img/icon.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
         <!-- Le styles -->
-        <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css">
-        <link href="css/global.css" media="screen" rel="stylesheet" type="text/css">
+        <link href="css/others/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/bootstrap-date-time-picker.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/file-input.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/bootstrap-toggle.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/bootstrap-select.min.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/others/animate.css" media="screen" rel="stylesheet" type="text/css" />
+        <link href="css/global.css" media="screen" rel="stylesheet" type="text/css" />
         <!-- Scripts -->
         <!--[if lt IE 9]>
         <script type="text/javascript" src="/js/others/html5shiv.min.js"></script>
@@ -61,6 +61,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="http://localhost/student/panel">Painel</a></li>
+                        <li><a href="forum.html">Fórum</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -106,6 +107,9 @@
                             <ul class="dropdown-menu" aria-labelledby="myTabDrop2" id="myTabDrop2-contents">
                                 <li>
                                     <a id="student-panel-my-teams-tab" onclick="studentListTeams()" href="#student-panel-my-teams" role="tab" data-toggle="tab" aria-controls="student-panel-my-teams" aria-expanded="true">Participando</a>
+                                </li>
+                                <li>
+                                    <a id="student-panel-link-team-tab" href="#student-panel-link-team" role="tab" data-toggle="tab" aria-controls="student-panel-link-team" aria-expanded="true">Vincular</a>
                                 </li>
                             </ul>
                         </li>
@@ -159,7 +163,7 @@
                                             <div class="col-sm-3"></div>
                                             <div class="input-group col-sm-7">
                                                 <!-- <input type="hidden" name="action" value="discipline_consult"/> -->
-                                                <input name="q" type="search" data-tb-target="tb-students-my-teams" class="form-control input-system-search" placeholder="Procurar..." required>
+                                                <input name="q" type="search" data-tb-target="tb-students-my-teams" class="form-control input-system-search" placeholder="Procurar..." required="required" />
                                                 <span class="input-group-btn">
                                                 <button class="btn btn-default" type="button" name="fetch" value="by_name"><i class="glyphicon glyphicon-search"></i></button>
                                                 </span>
@@ -172,13 +176,53 @@
                                 <table id="tb-students-my-teams" class="table table-bordered table-striped table-list-search">
                                     <thead>
                                     <tr>
-                                        <th>Turma</th>
+                                        <th class="col-md-3">Turma</th>
                                         <th>Professor</th>
-                                        <th>Opções</th>
+                                        <th class="col-md-1">Opções</th>
                                     </tr>
                                     </thead>
                                     <tbody id="tbody_MyTeams"></tbody>
                                 </table>
+                            </div>
+                        </div>
+                        <div id="student-panel-link-team" role="tabpanel" class="tab-pane fade in panel-div-tab" aria-labelledby="student-panel-link-team-tab">
+                            <div class="panel panel-default">
+                                <!-- Default panel contents -->
+                                <div class="panel-heading">
+                                    <h4>Turmas</h4>
+                                    Estas são as Turmas que você está participando atualmente.
+                                </div>
+                                <div class="panel-body">
+                                    <form class="form-horizontal" action="#" method="get">
+                                        <div class="form-group">
+                                            <div class="col-md-3"></div>
+                                            <div class="input-group col-md-6">
+                                                <script type="text/javascript">
+                                                    function changeSearchTarget() {
+                                                        if ($('#search-target').val() == 'teachers') {
+                                                            $('#search-target').val('teams')
+                                                        }
+                                                    }
+                                                </script>
+                                                <input id="search-target" name="search_target" type="hidden" value="teacher">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li onclick="changeSearchTarget()"><a href="#">Professor</a></li>
+                                                        <li onclick="changeSearchTarget()"><a href="#">Turma</a></li>
+                                                    </ul>
+                                                </div><!-- /btn-group -->
+                                                <input type="text" class="form-control" aria-label="..." placeholder="Buscar...">
+                                                <div class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" name="fetch" value="by_name">
+                                                        <i class="glyphicon glyphicon-search"></i>
+                                                    </button>
+                                                </div><!-- /btn-group -->
+                                            </div><!-- /input-group -->
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
