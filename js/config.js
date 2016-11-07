@@ -487,7 +487,7 @@ function setValuesToDebug(defaultValue, keyValueTest) {
                 {
                     'id' : 1421,
                     'team' : 'POO III',
-                    'title' : 'A relação entre a Class Thread e a Runnable.',
+                    'title' : 'A relação entre a Class Thread e a interface Runnable.',
                     'likes' : 23,
                     'replies' : 12,
                     'date' : '07/08/2016',

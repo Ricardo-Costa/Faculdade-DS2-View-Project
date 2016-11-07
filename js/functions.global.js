@@ -134,5 +134,4 @@ function getScriptTooTip() {
 
 $(document).ready(function (){
     $('[data-toggle="tooltip"]').tooltip();
-    $('#summernote').summernote();
 });

@@ -145,7 +145,8 @@ function studentGetPendingTasks(callback) {
  */
 function respondTask(taskId) {
     // formatar URL e redirecionar para página
-    window.location.assign(BASE_URL_STUDENT_RESPONDS_TASK + taskId);
+    // ToDo -> O correto : window.location.assign(BASE_URL_STUDENT_RESPONDS_TASK + taskId);
+    window.location.assign('student-responds-task.html');
 }
 
 /**
